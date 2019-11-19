@@ -1,0 +1,8 @@
+Andrés Ruiz Bartolomé
+Juan Manuel Salvá Rossich
+
+Funcionalidades opcionales:
+Permitir controlar la velocidad de las flechas según el tiempo desde su carga
+Permitir modificar la orientacion del arco y por tanto del disparo con las teclas "o" y "l"
+Mostrar en la ventana gráfica la puntuación y las flechas disponibles
+Mantener un registro de las 10 mejores puntuaciones
