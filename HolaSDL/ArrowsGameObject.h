@@ -26,7 +26,7 @@ public:
 	virtual ~ArrowsGameObject();
 
 	virtual void render() = 0;
-	virtual bool update() = 0;
+	virtual void update() = 0;
 	virtual SDL_Rect getDestRect() = 0;
 	virtual SDL_Rect getCollisionRect() = 0;
 	virtual void loadFromFile() = 0;

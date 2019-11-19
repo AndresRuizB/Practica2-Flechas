@@ -16,7 +16,7 @@ public:
 	~Arrow();
 	void render();
 	void estableceVel(int vel);
-	bool update();
+	void update();
 	void establecePos(Vector2D pos);
 	void estableceAng(double ang);
 	SDL_Rect getDestRect();

@@ -23,7 +23,7 @@ Game::Game() {
 
 	//creacion del arco
 	arco = new Bow(textures[5], this);
-	objetos.push_back(arco); //guarda en arco en el array de objetos
+	objetos.push_back(arco);
 
 	numFlechas = FLECHAS_INICIALES; //numero de flechas iniciales
 	puntuacion = 0; //puntuacion inicial
@@ -33,8 +33,7 @@ Game::Game() {
 
 Game::~Game() { //destructora
 	delete arco; //se destruyen todos los objetos del juego
-	objetos.erase(objetos.begin()); //quita al arco del vector
-	for (int i = 0; i < NUM_TEXTURES; i++) delete textures[i];
+	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
 	for (int i = 0; i < objetos.size(); i++) delete objetos[i];
 	//for (int i = 0; i < globos.size(); i++) delete globos[i];
 	//for (int i = 0; i < flechas.size(); i++) delete flechas[i];
@@ -63,15 +62,11 @@ void Game::run() {
 void Game::update() { //avisa a los objetos para que se actualicen
 
 	for (int i = 0; i < objetos.size();i++) {	
-		if (!objetos[i]->update()) { //desaparece el objeto
-
-			if (typeid(*objetos[i]) == typeid(Arrow))destruyeFlecha(objetos[i]);
-
-			delete objetos[i];
-			objetos.erase(objetos.begin()+i);
-			cout << "\nobjeto destruido\n";
-			i--;
-		}
+		objetos[i]->update();	
+	}
+	
+	for (int i = 0; i < objPenDestruccion.size(); i++) {		
+		objetos.erase(objPenDestruccion[i]);
 	}
 
 	generaGlobo();
@@ -151,18 +146,6 @@ Texture* Game::returnPuntTextura(int indice) {
 	return textures[indice];
 }
 
-/*void Game::killObject(vector<GameObject*>::iterator it) {
+void Game::killObject(vector<GameObject*>::iterator it) {
 	objPenDestruccion.push_back(it);
-}*/
-
-void Game::destruyeFlecha(GameObject* f) {
-	bool encontrado = false;
-	int i = 0;
-
-	while (!encontrado && i < flechasObjetos.size()) { //busca la flecha dada para eliminarla de su array
-		if (flechasObjetos[i] == f) {
-			flechasObjetos.erase(flechasObjetos.begin()); //si es flecha destruye la primera flecha
-			encontrado = true;
-		}
-	}	
 }

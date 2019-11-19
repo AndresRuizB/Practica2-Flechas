@@ -29,7 +29,7 @@ Balloon::~Balloon()
 { //destructora
 }
 
-bool Balloon::update() {	//devuelve true si el globo sigue vivo
+void Balloon::update() {	//devuelve true si el globo sigue vivo
 
 	if (!pinchado) posicion = posicion + direccion; //calcula la proxima posicion segun su direccion
 
@@ -45,13 +45,12 @@ bool Balloon::update() {	//devuelve true si el globo sigue vivo
 
 	if (momentoPinchado > (VELOCIDAD_ANIMACION_PINCHADO * 5)) {
 		game->actualizaPuntuacion();
-		return false;
+		//return false;
 	}
 	else if (posicion.GetY() + alto / 40 < 0) { //si se ha salido o ha terminado la animacion de destruirse
-		return false;
+		//return false;
 	}
-	else return true;
-	return true;
+	//else return true;
 }
 
 

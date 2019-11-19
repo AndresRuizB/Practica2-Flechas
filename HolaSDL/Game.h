@@ -23,7 +23,7 @@ const double PI = 3.14159265;
 
 //constantes de velocidades
 const uint VELOCIDAD_ARCO = 5;
-const uint VEL_ROTACION_ARCO = 8;
+const uint VEL_ROTACION_ARCO = 8;	//velocidad del giro del arco
 const uint VELOCIDAD_FLECHA = 5;
 const uint VELOCIDAD_FLECHA_MAX = 20;
 const uint VELOCIDAD_GLOBO = 1;
@@ -67,13 +67,14 @@ private:
 	bool exit = false;
 	Texture* textures[NUM_TEXTURES];
 
+	//vector<Balloon*> globos;
+	//vector<Arrow*> flechas;
 	vector<GameObject*> objetos;
 	vector<Arrow*> flechasObjetos;
 	vector<EventHandler*> hEventsObjetos;
-	//vector<vector<GameObject*>::iterator> objPenDestruccion;         por q se necesita esto?
+	vector<vector<GameObject*>::iterator> objPenDestruccion;
 
 	GameObject* arco;
-
 	int puntuacion, numFlechas;
 	ScoreBoard* scoreBoard;
 	vector<InfoTexture> texturesInfo = {
@@ -101,6 +102,5 @@ public:
 	int returnNumFlechas();
 	Texture* returnPuntTextura(int indice);
 	void generaGlobo();
-	//void killObject(vector<GameObject*>::iterator it);
-	void destruyeFlecha(GameObject* f);
+	void killObject(vector<GameObject*>::iterator it);
 };

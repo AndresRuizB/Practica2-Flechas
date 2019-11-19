@@ -44,10 +44,10 @@ void Arrow::estableceAng(double ang) {
 }
 
 //mueve la flecha (true si sigue en la pantalla)
-bool Arrow::update() {
+void Arrow::update() {
 	posicion = posicion + Vector2D(velocidad * cos(angulo * PI / 180), velocidad * (sin(angulo * PI / 180))); //cambia la posicion dependiendo del angulo
-	if (posicion.GetX() > WIN_WIDTH || posicion.GetX() < 0 || posicion.GetY() > WIN_HEIGHT || posicion.GetY() < 0) return false;
-	else return true;
+	if (posicion.GetX() > WIN_WIDTH || posicion.GetX() < 0 || posicion.GetY() > WIN_HEIGHT || posicion.GetY() < 0) /*return false*/;
+
 }
 
 SDL_Rect Arrow::getDestRect() { return SDL_Rect(); }

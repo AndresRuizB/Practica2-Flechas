@@ -36,10 +36,9 @@ void Bow::render() { //tiene que llanar al renderer de su textura
 	textura->renderFrame(frameDestino, 0, 0, angulo, SDL_FLIP_NONE);	//renderframe para poder rotarlo
 };
 
-bool Bow::update() {
+void Bow::update() {
 	if (posicion.GetY() + direccion.GetY() > 0 && posicion.GetY() + direccion.GetY() < 450)posicion = posicion + direccion;
 	if (cargado && velFlecha < VELOCIDAD_FLECHA_MAX)velFlecha += 0.1f; //si esta cargado la velocidad acumulado va subiendo hasta el maximo
-	return true;
 }
 
 

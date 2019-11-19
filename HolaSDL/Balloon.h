@@ -22,7 +22,7 @@ public:
 	SDL_Rect frameDestino; //donde va a ser pintado
 	Balloon(Texture* t, Game* g);
 	~Balloon();
-	bool update();
+	void update();
 	void render();
 	double returnY();
 	SDL_Rect getDestRect();

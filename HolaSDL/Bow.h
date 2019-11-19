@@ -22,7 +22,7 @@ public:
 	//avisa a su textura q se rendere
 	virtual void render();
 	void handleEvent(SDL_Event& event);
-	virtual bool update();
+	virtual void update();
 	void cambioTextura(Texture* t);
 	void disparar();
 	SDL_Rect getDestRect();
