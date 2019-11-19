@@ -4,6 +4,8 @@
 #include "Bow.h"
 #include "Balloon.h"
 #include <vector>
+#include <iterator>
+#include <list>
 #include "Vector2D.h"
 #include "checkML.h"
 #include "Arrow.h"
@@ -67,12 +69,12 @@ private:
 	bool exit = false;
 	Texture* textures[NUM_TEXTURES];
 
-	//vector<Balloon*> globos;
-	//vector<Arrow*> flechas;
-	vector<GameObject*> objetos;
-	vector<Arrow*> flechasObjetos;
-	vector<EventHandler*> hEventsObjetos;
-	vector<vector<GameObject*>::iterator> objPenDestruccion;
+	list<GameObject*> objetos;
+	list<Arrow*> flechasObjetos;
+	list<EventHandler*> hEventsObjetos;
+	list<list<GameObject*>::iterator> objPenDestruccion;
+
+
 
 	GameObject* arco;
 	int puntuacion, numFlechas;

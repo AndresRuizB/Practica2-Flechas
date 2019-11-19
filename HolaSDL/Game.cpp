@@ -5,6 +5,8 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "ScoreBoard.h"
+#include <iterator>
+#include <list>
 
 using namespace std;
 
@@ -24,6 +26,7 @@ Game::Game() {
 	//creacion del arco
 	arco = new Bow(textures[5], this);
 	objetos.push_back(arco);
+	hEventsObjetos.push_back(static_cast<Bow*>(arco));
 
 	numFlechas = FLECHAS_INICIALES; //numero de flechas iniciales
 	puntuacion = 0; //puntuacion inicial
@@ -34,9 +37,15 @@ Game::Game() {
 Game::~Game() { //destructora
 	delete arco; //se destruyen todos los objetos del juego
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
-	for (int i = 0; i < objetos.size(); i++) delete objetos[i];
+
+	for (auto it = objetos.begin(); it != objetos.end(); ++it) {
+		delete *it;
+		objetos.erase(it);
+	}
+
 	//for (int i = 0; i < globos.size(); i++) delete globos[i];
 	//for (int i = 0; i < flechas.size(); i++) delete flechas[i];
+
 	delete scoreBoard;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -61,14 +70,16 @@ void Game::run() {
 
 void Game::update() { //avisa a los objetos para que se actualicen
 
-	for (int i = 0; i < objetos.size();i++) {	
-		objetos[i]->update();	
+	for (auto it = objetos.begin(); it != objetos.end(); ++it) {
+		static_cast<GameObject*>(*it)->update();
 	}
 	
-	for (int i = 0; i < objPenDestruccion.size(); i++) {		
-		objetos.erase(objPenDestruccion[i]);
+	for (auto it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
+		delete **it;
+		objetos.erase(*it);
 	}
 
+	objPenDestruccion.clear();
 	generaGlobo();
 	condicionFinDeJuego();
 }
@@ -78,7 +89,7 @@ void Game::render() const {
 
 	SDL_RenderCopy(renderer, textures[3]->getTexture(), nullptr, nullptr); //rendariza el fondo
 
-	for (int i = 0; i < objetos.size(); i++) objetos[i]->render(); 
+	for (auto it = objetos.begin(); it != objetos.end(); ++it) static_cast<GameObject*>(*it)->render();
 
 	scoreBoard->render(); //renderiza la ui
 
@@ -90,7 +101,9 @@ void Game::handleEvents() {
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
 		else {
-			static_cast<Bow*>(arco)->handleEvent(event); //los eventos del arco
+			for (auto it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
+				static_cast<EventHandler*>(*it)->handleEvent(event);
+			}
 		}
 	}
 }
@@ -107,10 +120,10 @@ void Game::disparar(Arrow* r) {
 
 bool Game::colision(SDL_Rect* globoC) {
 	bool colision = false;
-	int cont = 0;
-	while (!colision && cont < flechasObjetos.size()) { //mientras no hay colision y siguen quedando flechas por revisar
-		colision = SDL_HasIntersection(globoC, &flechasObjetos[cont]->getCollisionRect()); //mira si hay colision
-		cont++;
+	auto it = flechasObjetos.begin();
+	while (!colision && it != flechasObjetos.end()) { //mientras no hay colision y siguen quedando flechas por revisar
+		colision = SDL_HasIntersection(globoC, &static_cast<Arrow*>(*it)->getCollisionRect()); //mira si hay colision
+		++it;
 	}
 	return colision; //devulve si ha habido colision
 }
@@ -147,5 +160,6 @@ Texture* Game::returnPuntTextura(int indice) {
 }
 
 void Game::killObject(vector<GameObject*>::iterator it) {
-	objPenDestruccion.push_back(it);
+	//ESTO YA SON PALABRAS MAYORES
+	//objPenDestruccion.push_back(it);
 }
