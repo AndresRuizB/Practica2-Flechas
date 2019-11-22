@@ -3,6 +3,7 @@
 #include "Vector2D.h"
 #include "Texture.h"
 #include "Game.h"
+#include <list>
 
 Arrow::Arrow(Texture* t)
 {
@@ -46,7 +47,9 @@ void Arrow::estableceAng(double ang) {
 //mueve la flecha (true si sigue en la pantalla)
 void Arrow::update() {
 	posicion = posicion + Vector2D(velocidad * cos(angulo * PI / 180), velocidad * (sin(angulo * PI / 180))); //cambia la posicion dependiendo del angulo
-	if (posicion.GetX() > WIN_WIDTH || posicion.GetX() < 0 || posicion.GetY() > WIN_HEIGHT || posicion.GetY() < 0) /*return false*/;
+	if (posicion.GetX() > WIN_WIDTH || posicion.GetX() < 0 || posicion.GetY() > WIN_HEIGHT || posicion.GetY() < 0) {
+		game->killObject(posicionEnEstructura);
+	}
 
 }
 
@@ -65,4 +68,4 @@ void Arrow::loadFromFile() {}
 
 void Arrow::saveToFile() {}
 
-void Arrow::setItList(vector<GameObject*>::iterator it) { posicionEnEstructura = it; }
+void Arrow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

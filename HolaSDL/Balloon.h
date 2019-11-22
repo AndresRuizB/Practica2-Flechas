@@ -5,6 +5,7 @@
 #include "Vector2D.h"
 #include "Texture.h"
 #include "ArrowsGameObject.h"
+#include <list>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ private:
 	bool pinchado = false, nuevoGlobo = false;
 	int momentoPinchado;
 	int globo; //que sprite de globo tiene
+
 
 public:
 
@@ -29,5 +31,5 @@ public:
 	SDL_Rect getCollisionRect();
 	void loadFromFile();
 	void saveToFile();
-	void setItList(vector<GameObject*>::iterator it);
+	void setItList(list<GameObject*>::iterator it);
 };

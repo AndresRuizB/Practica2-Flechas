@@ -43,9 +43,6 @@ Game::~Game() { //destructora
 		objetos.erase(it);
 	}
 
-	//for (int i = 0; i < globos.size(); i++) delete globos[i];
-	//for (int i = 0; i < flechas.size(); i++) delete flechas[i];
-
 	delete scoreBoard;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -71,10 +68,13 @@ void Game::run() {
 void Game::update() { //avisa a los objetos para que se actualicen
 
 	for (auto it = objetos.begin(); it != objetos.end(); ++it) {
-		static_cast<GameObject*>(*it)->update();
+		(*it)->update();
 	}
+
+	cout << "Objetos" << objetos.size() <<endl;
 	
 	for (auto it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
+
 		delete **it;
 		objetos.erase(*it);
 	}
@@ -89,7 +89,7 @@ void Game::render() const {
 
 	SDL_RenderCopy(renderer, textures[3]->getTexture(), nullptr, nullptr); //rendariza el fondo
 
-	for (auto it = objetos.begin(); it != objetos.end(); ++it) static_cast<GameObject*>(*it)->render();
+	for (auto it = objetos.begin(); it != objetos.end(); ++it) (*it)->render();
 
 	scoreBoard->render(); //renderiza la ui
 
@@ -102,7 +102,7 @@ void Game::handleEvents() {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
 		else {
 			for (auto it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
-				static_cast<EventHandler*>(*it)->handleEvent(event);
+				(*it)->handleEvent(event);
 			}
 		}
 	}
@@ -111,6 +111,8 @@ void Game::handleEvents() {
 void Game::disparar(Arrow* r) {
 	if (numFlechas > 0) { //si quedan flechas
 		objetos.push_back(r); 
+		list<GameObject*>::iterator it = objetos.end();
+		r->setItList(--it);
 		flechasObjetos.push_back(r);
 		numFlechas--;
 		scoreBoard->actualizaFlechas(numFlechas); //elimina una flecha de la ui
@@ -122,7 +124,7 @@ bool Game::colision(SDL_Rect* globoC) {
 	bool colision = false;
 	auto it = flechasObjetos.begin();
 	while (!colision && it != flechasObjetos.end()) { //mientras no hay colision y siguen quedando flechas por revisar
-		colision = SDL_HasIntersection(globoC, &static_cast<Arrow*>(*it)->getCollisionRect()); //mira si hay colision
+		colision = SDL_HasIntersection(globoC, &(*it)->getCollisionRect()); //mira si hay colision
 		++it;
 	}
 	return colision; //devulve si ha habido colision
@@ -135,8 +137,10 @@ void Game::condicionFinDeJuego() {
 void Game::generaGlobo() {
 	int probGlobo = rand() % 1000 + 1;
 	if (probGlobo <= PROBABILIDAD_GLOBO) {
-		Balloon* glo = new Balloon(textures[2], this); //crea el globo
+		Balloon* glo = new Balloon(textures[2], this); //crea el globo		
 		objetos.push_back(glo); //añade el globo al vector
+		list<GameObject*>::iterator it = objetos.end();
+		glo->setItList(--it);
 	}//aparece un globo
 }
 
@@ -159,7 +163,6 @@ Texture* Game::returnPuntTextura(int indice) {
 	return textures[indice];
 }
 
-void Game::killObject(vector<GameObject*>::iterator it) {
-	//ESTO YA SON PALABRAS MAYORES
-	//objPenDestruccion.push_back(it);
+void Game::killObject(list<GameObject*>::iterator it) {
+	objPenDestruccion.push_back(it); //añade el objeto a la destruccion
 }

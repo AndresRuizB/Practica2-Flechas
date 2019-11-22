@@ -4,6 +4,7 @@
 #include "Bow.h"
 #include "Arrow.h"
 #include "Game.h"
+#include <list>
 
 using namespace std;
 
@@ -97,4 +98,4 @@ SDL_Rect Bow::getCollisionRect() { return SDL_Rect(); }
 void Bow::loadFromFile() {}
 void Bow::saveToFile() {}
 
-void Bow::setItList(vector<GameObject*>::iterator it) { posicionEnEstructura = it; }
+void Bow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

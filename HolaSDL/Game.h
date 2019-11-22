@@ -104,5 +104,5 @@ public:
 	int returnNumFlechas();
 	Texture* returnPuntTextura(int indice);
 	void generaGlobo();
-	void killObject(vector<GameObject*>::iterator it);
+	void killObject(list<GameObject*>::iterator it);
 };

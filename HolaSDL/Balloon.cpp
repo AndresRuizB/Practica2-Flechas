@@ -5,6 +5,7 @@
 #include "Balloon.h"
 #include "Texture.h"
 #include "Game.h"
+#include <list>
 
 using namespace std;
 
@@ -45,12 +46,10 @@ void Balloon::update() {	//devuelve true si el globo sigue vivo
 
 	if (momentoPinchado > (VELOCIDAD_ANIMACION_PINCHADO * 5)) {
 		game->actualizaPuntuacion();
-		//return false;
 	}
 	else if (posicion.GetY() + alto / 40 < 0) { //si se ha salido o ha terminado la animacion de destruirse
-		//return false;
+		game->killObject(posicionEnEstructura);
 	}
-	//else return true;
 }
 
 
@@ -74,4 +73,4 @@ SDL_Rect Balloon::getCollisionRect() { return SDL_Rect(); }
 void Balloon::loadFromFile() {}
 void Balloon::saveToFile() {}
 
-void Balloon::setItList(vector<GameObject*>::iterator it) { posicionEnEstructura = it; }
+void Balloon::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

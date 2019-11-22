@@ -5,6 +5,7 @@
 #include "checkML.h"
 #include "ArrowsGameObject.h"
 #include "EventHandler.h"
+#include <list>
 
 class Game;
 
@@ -29,7 +30,7 @@ public:
 	SDL_Rect getCollisionRect();
 	void loadFromFile();
 	void saveToFile();
-	void setItList(vector<GameObject*>::iterator it);
+	void setItList(list<GameObject*>::iterator it);
 };
 
 

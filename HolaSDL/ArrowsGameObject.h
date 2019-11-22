@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "GameObject.h"
 #include <vector>
+#include <list>
 
 class Game;
 
@@ -19,7 +20,7 @@ protected:
 	Vector2D direccion;
 	Texture* textura;
 	Game* game;
-	vector<GameObject*>::iterator posicionEnEstructura; 
+	list<GameObject*>::iterator posicionEnEstructura;
 
 public:
 	ArrowsGameObject();
@@ -30,7 +31,7 @@ public:
 	virtual SDL_Rect getDestRect() = 0;
 	virtual SDL_Rect getCollisionRect() = 0;
 	virtual void loadFromFile() = 0;
-	virtual void saveToFile() = 0;	
-	virtual void setItList(vector<GameObject*>::iterator it) = 0;
+	virtual void saveToFile() = 0;
+	virtual void setItList(list<GameObject*>::iterator it) = 0;
 
 };

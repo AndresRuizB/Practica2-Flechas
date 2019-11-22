@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "checkML.h"
 #include "ArrowsGameObject.h"
+#include <list>
 
 class Arrow:public ArrowsGameObject
 {
@@ -23,5 +24,5 @@ public:
 	SDL_Rect getCollisionRect();
 	void loadFromFile();
 	void saveToFile();
-	void setItList(vector<GameObject*>::iterator it);
+	void setItList(list<GameObject*>::iterator it);
 };
