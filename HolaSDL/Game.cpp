@@ -24,21 +24,23 @@ Game::Game() {
 	}
 
 	//creacion del arco
-	arco = new Bow(textures[5], this);
+	arco = new Bow(textures[bowUncharged], this);
 	objetos.push_back(arco);
 	hEventsObjetos.push_back(static_cast<Bow*>(arco));
+
+	numMariposas = NUMERO_MARIPOSAS;
 
 	numFlechas = FLECHAS_INICIALES; //numero de flechas iniciales
 	puntuacion = 0; //puntuacion inicial
 
-	scoreBoard = new ScoreBoard(textures[6], textures[1]); //creacion de la ui
+	scoreBoard = new ScoreBoard(textures[digits], textures[arrowUI]); //creacion de la ui
 }
 
 Game::~Game() { //destructora
-	delete arco; //se destruyen todos los objetos del juego
+	delete arco;
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
 
-	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
+	for (list<GameObject*>::iterator it = objetos.begin(); it != --objetos.end(); ++it) {	//el arco se elimina a parte
 		delete *it;
 		objetos.erase(it);
 	}
@@ -52,6 +54,9 @@ Game::~Game() { //destructora
 void Game::run() {
 	int startTime, frameTime;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
+
+	generaMariposas(NUMERO_MARIPOSAS);
+
 	while (!exit) { // mientras se este jugando
 		startTime = SDL_GetTicks();
 		handleEvents();
@@ -91,7 +96,7 @@ void Game::update() { //avisa a los objetos para que se actualicen
 void Game::render()  const{
 	SDL_RenderClear(renderer); //limpia la pantalla
 
-	SDL_RenderCopy(renderer, textures[3]->getTexture(), nullptr, nullptr); //rendariza el fondo
+	SDL_RenderCopy(renderer, textures[background1]->getTexture(), nullptr, nullptr); //rendariza el fondo
 
 	for ( list<GameObject*>::const_iterator it = objetos.begin(); it != objetos.end(); ++it)(*it)->render();
 
@@ -139,21 +144,38 @@ bool Game::colision(SDL_Rect* globoC) {
 }
 
 void Game::condicionFinDeJuego() {
-	if (numFlechas <= 0 && flechasObjetos.size() == 0) exit = true; //condicion de fin de juego
+	if (numFlechas <= 0 
+		&& flechasObjetos.size() == 0 
+		|| numMariposas <= 0) exit = true; //condicion de fin de juego
 }
 
 void Game::generaGlobo() {
 	int probGlobo = rand() % 1000 + 1;
 	if (probGlobo <= PROBABILIDAD_GLOBO) {
-		Balloon* glo = new Balloon(textures[2], this); //crea el globo		
+		Balloon* glo = new Balloon(textures[balloons], this); //crea el globo		
 		objetos.push_back(glo); //añade el globo al vector
 		list<GameObject*>::iterator it = objetos.end();
 		glo->setItList(--it);
 	}//aparece un globo
 }
 
-void Game::actualizaPuntuacion() {
-	puntuacion += PUNTUACION_POR_GLOBO;
+void Game::generaMariposas(int num) {
+	for (int i = 0; i < num; i++) {
+		Butterfly* bfly = new Butterfly(textures[butterflys], this);
+		objetos.push_back(bfly);
+		list<GameObject*>::iterator it = objetos.end();
+		bfly->setItList(--it);
+	}
+}
+
+void Game::mataMariposa()
+{
+	numMariposas--;
+}
+
+void Game::actualizaPuntuacion(int puntos) {
+	puntuacion += puntos;
+	if (puntuacion < 0) puntuacion = 0;
 	cout << "Puntuacion: " << puntuacion << "\n";
 	scoreBoard->actualizaPuntuacion(puntuacion); //actualiza la puntuacion en pantalla
 }
@@ -179,3 +201,4 @@ void Game::killObjectFlecha(list<Arrow*>::iterator it)
 {
 	flechasPenDestruccion.push_back(it);
 }
+

@@ -18,6 +18,6 @@ public:
 	void Normalizar();
 	Vector2D operator+(const Vector2D& vector) const;
 	Vector2D operator-(const Vector2D& vector) const;
-	double operator*(const Vector2D vector) const;
+	Vector2D operator*(const Vector2D vector) const;
 	void ProductoPorEscalar(double escalar);
 };
