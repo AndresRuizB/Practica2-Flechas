@@ -5,8 +5,9 @@
 #include "Game.h"
 #include <list>
 
-Arrow::Arrow(Texture* t)
+Arrow::Arrow(Texture* t, Game* g)
 {
+	game = g;
 	ancho = t->getW();
 	alto = t->getH();
 	textura = t;
@@ -49,6 +50,7 @@ void Arrow::update() {
 	posicion = posicion + Vector2D(velocidad * cos(angulo * PI / 180), velocidad * (sin(angulo * PI / 180))); //cambia la posicion dependiendo del angulo
 	if (posicion.GetX() > WIN_WIDTH || posicion.GetX() < 0 || posicion.GetY() > WIN_HEIGHT || posicion.GetY() < 0) {
 		game->killObject(posicionEnEstructura);
+		game->killObjectFlecha(posEnEstrFlechas);
 	}
 
 }
@@ -69,3 +71,6 @@ void Arrow::loadFromFile() {}
 void Arrow::saveToFile() {}
 
 void Arrow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }
+
+void Arrow::setItListFlechas(list<Arrow*>::iterator it) { posEnEstrFlechas = it; }
+

@@ -81,7 +81,7 @@ void Bow::cambioTextura(Texture* t) {	//cambia la textura del arco y actualiza l
 
 void Bow::disparar() {
 	if (cargado) { //si esta cargado
-		Arrow* r = new Arrow(game->returnPuntTextura(arrowPhysics));
+		Arrow* r = new Arrow(game->returnPuntTextura(arrowPhysics),game);
 		flecha = r; //asigna la flecha
 		flecha->estableceVel(velFlecha);
 		flecha->establecePos(posicion); //actualiza las variables de la flecha

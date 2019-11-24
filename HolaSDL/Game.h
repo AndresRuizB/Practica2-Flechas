@@ -28,13 +28,13 @@ const uint VELOCIDAD_ARCO = 5;
 const uint VEL_ROTACION_ARCO = 8;	//velocidad del giro del arco
 const uint VELOCIDAD_FLECHA = 5;
 const uint VELOCIDAD_FLECHA_MAX = 20;
-const uint VELOCIDAD_GLOBO = 1;
+const uint VELOCIDAD_GLOBO = 3;
 const uint VELOCIDAD_ANIMACION_PINCHADO = 5;
 
 //constantes de cantidad
 const uint PUNTUACION_POR_GLOBO = 10;
 const uint FLECHAS_INICIALES = 10;
-const double PROBABILIDAD_GLOBO = 35;
+const double PROBABILIDAD_GLOBO = 5;
 
 //constantes de medidas
 const uint LIMITE_IZQUIERDO_GLOBOS = 300;
@@ -71,6 +71,7 @@ private:
 
 	list<GameObject*> objetos;
 	list<Arrow*> flechasObjetos;
+	list<list<Arrow*>::iterator> flechasPenDestruccion;
 	list<EventHandler*> hEventsObjetos;
 	list<list<GameObject*>::iterator> objPenDestruccion;
 
@@ -105,4 +106,5 @@ public:
 	Texture* returnPuntTextura(int indice);
 	void generaGlobo();
 	void killObject(list<GameObject*>::iterator it);
+	void killObjectFlecha(list<Arrow*>::iterator it);
 };

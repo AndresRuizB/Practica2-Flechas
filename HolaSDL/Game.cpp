@@ -38,7 +38,7 @@ Game::~Game() { //destructora
 	delete arco; //se destruyen todos los objetos del juego
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
 
-	for (auto it = objetos.begin(); it != objetos.end(); ++it) {
+	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
 		delete *it;
 		objetos.erase(it);
 	}
@@ -66,30 +66,34 @@ void Game::run() {
 }
 
 void Game::update() { //avisa a los objetos para que se actualicen
-
-	for (auto it = objetos.begin(); it != objetos.end(); ++it) {
+	
+	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {		
 		(*it)->update();
 	}
 
-	cout << "Objetos" << objetos.size() <<endl;
+	cout << "Obj: " << objetos.size() <<endl;
 	
-	for (auto it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
-
+	for (list<list<GameObject*>::iterator>::iterator it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
 		delete **it;
-		objetos.erase(*it);
+		objetos.erase(*it);		
+	}
+
+	for (list<list<Arrow*>::iterator>::iterator it = flechasPenDestruccion.begin(); it != flechasPenDestruccion.end(); it++) {
+		flechasObjetos.erase(*it);
 	}
 
 	objPenDestruccion.clear();
+	flechasPenDestruccion.clear();
 	generaGlobo();
 	condicionFinDeJuego();
 }
 
-void Game::render() const {
+void Game::render()  const{
 	SDL_RenderClear(renderer); //limpia la pantalla
 
 	SDL_RenderCopy(renderer, textures[3]->getTexture(), nullptr, nullptr); //rendariza el fondo
 
-	for (auto it = objetos.begin(); it != objetos.end(); ++it) (*it)->render();
+	for ( list<GameObject*>::const_iterator it = objetos.begin(); it != objetos.end(); ++it)(*it)->render();
 
 	scoreBoard->render(); //renderiza la ui
 
@@ -101,7 +105,7 @@ void Game::handleEvents() {
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
 		else {
-			for (auto it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
+			for (list<EventHandler*>::iterator it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
 				(*it)->handleEvent(event);
 			}
 		}
@@ -110,10 +114,14 @@ void Game::handleEvents() {
 
 void Game::disparar(Arrow* r) {
 	if (numFlechas > 0) { //si quedan flechas
-		objetos.push_back(r); 
+		objetos.push_back(r); //lista gameobjects
 		list<GameObject*>::iterator it = objetos.end();
 		r->setItList(--it);
-		flechasObjetos.push_back(r);
+
+		flechasObjetos.push_back(r);//lista flechas
+		list<Arrow*>::iterator itF = flechasObjetos.end();
+		r->setItListFlechas(--itF);
+
 		numFlechas--;
 		scoreBoard->actualizaFlechas(numFlechas); //elimina una flecha de la ui
 		cout << "Flechas disponibles: " << numFlechas << "\n";
@@ -122,7 +130,7 @@ void Game::disparar(Arrow* r) {
 
 bool Game::colision(SDL_Rect* globoC) {
 	bool colision = false;
-	auto it = flechasObjetos.begin();
+	list<Arrow*>::iterator it = flechasObjetos.begin();
 	while (!colision && it != flechasObjetos.end()) { //mientras no hay colision y siguen quedando flechas por revisar
 		colision = SDL_HasIntersection(globoC, &(*it)->getCollisionRect()); //mira si hay colision
 		++it;
@@ -165,4 +173,9 @@ Texture* Game::returnPuntTextura(int indice) {
 
 void Game::killObject(list<GameObject*>::iterator it) {
 	objPenDestruccion.push_back(it); //añade el objeto a la destruccion
+}
+
+void Game::killObjectFlecha(list<Arrow*>::iterator it)
+{
+	flechasPenDestruccion.push_back(it);
 }

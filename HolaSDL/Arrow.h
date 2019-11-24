@@ -11,9 +11,11 @@ private:
 	int  velocidad;
 	Texture* textura;
 	double angulo;
+	Game* game;
+	list<Arrow*>::iterator posEnEstrFlechas;
 
 public:
-	Arrow(Texture* t);
+	Arrow(Texture* t, Game* g);
 	~Arrow();
 	void render();
 	void estableceVel(int vel);
@@ -25,4 +27,5 @@ public:
 	void loadFromFile();
 	void saveToFile();
 	void setItList(list<GameObject*>::iterator it);
+	void setItListFlechas(list<Arrow*>::iterator it);
 };
