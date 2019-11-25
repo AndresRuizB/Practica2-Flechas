@@ -13,6 +13,7 @@ private:
 	double angulo;
 	Game* game;
 	list<Arrow*>::iterator posEnEstrFlechas;
+	int numGlobosExplotados;
 
 public:
 	Arrow(Texture* t, Game* g);
@@ -28,4 +29,5 @@ public:
 	void saveToFile();
 	void setItList(list<GameObject*>::iterator it);
 	void setItListFlechas(list<Arrow*>::iterator it);
+	int explotoUnGlobo();
 };

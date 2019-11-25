@@ -18,6 +18,7 @@ private:
 	int momentoPinchado;
 	int globo; //que sprite de globo tiene
 	SDL_Rect frameDestino; //donde va a ser pintado
+	int globosPinchadosTemp, globosPinchados;
 
 public:	
 	Balloon(Texture* t, Game* g);

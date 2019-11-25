@@ -21,6 +21,7 @@ Balloon::Balloon(Texture* t, Game* g)
 	textura = t;
 	globo = rand() % 6;
 	frameDestino = SDL_Rect{};
+	globosPinchadosTemp = 0, globosPinchados = 0;
 
 	pinchado = false;
 	momentoPinchado = 0; //0 cuando no ha sido pinchado
@@ -40,16 +41,17 @@ void Balloon::update() {	//devuelve true si el globo sigue vivo
 	frameDestino.y = posicion.GetY();
 
 	//COLISION
-	if (game->colision(&frameDestino)) {
+	if (!pinchado && game->colision(&frameDestino, globosPinchadosTemp)) {
 		pinchado = true;
+		globosPinchados = globosPinchadosTemp;
 	}
 
 	if (momentoPinchado > (VELOCIDAD_ANIMACION_PINCHADO * 5)) {
-		game->actualizaPuntuacion(PUNTUACION_POR_GLOBO);
+		game->actualizaPuntuacion(pow(globosPinchados-1,2) * PUNTUACION_POR_GLOBO + PUNTUACION_POR_GLOBO);
 		game->killObject(posicionEnEstructura);
 		game->createReward(posicion.GetX(), posicion.GetY());
 	}
-	else if (posicion.GetY()+ (alto / ESCALA_GLOBO) <= 0) { //si se ha salido o ha terminado la animacion de destruirse
+	else if (posicion.GetY() + (alto / ESCALA_GLOBO) <= 0) { //si se ha salido o ha terminado la animacion de destruirse
 		game->killObject(posicionEnEstructura);
 	}
 }

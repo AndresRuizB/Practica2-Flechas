@@ -14,6 +14,7 @@ Arrow::Arrow(Texture* t, Game* g)
 	posicion = Vector2D(0, 0);
 	velocidad = 0;
 	angulo = 0;
+	numGlobosExplotados = 0;
 }
 
 Arrow::~Arrow()
@@ -73,4 +74,10 @@ void Arrow::saveToFile() {}
 void Arrow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }
 
 void Arrow::setItListFlechas(list<Arrow*>::iterator it) { posEnEstrFlechas = it; }
+
+int Arrow::explotoUnGlobo()
+{
+	numGlobosExplotados++;
+	return numGlobosExplotados;
+}
 

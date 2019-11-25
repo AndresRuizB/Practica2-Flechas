@@ -124,6 +124,17 @@ void Game::disparar(Arrow* r) {
 	}
 }
 
+bool Game::colision(SDL_Rect* globoC, int& numHits) {
+	bool colision = false;	
+	list<Arrow*>::iterator it = flechasObjetos.begin();
+	while (!colision && it != flechasObjetos.end()) { //mientras no hay colision y siguen quedando flechas por revisar
+		colision = SDL_HasIntersection(globoC, &(*it)->getCollisionRect()); //mira si hay colision
+		if (colision) numHits = (*it)->explotoUnGlobo();
+		++it;
+	}
+	return colision; //devulve si ha habido colision
+}
+
 bool Game::colision(SDL_Rect* globoC) {
 	bool colision = false;
 	list<Arrow*>::iterator it = flechasObjetos.begin();

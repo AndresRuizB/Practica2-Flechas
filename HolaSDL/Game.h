@@ -136,7 +136,7 @@ private:
 	};
 
 	vector<InfoLevels> levelsInfo = {
-		InfoLevels{0, 300, 5, 0},
+		InfoLevels{0, 300, 4, 0},
 		InfoLevels{1, 100, 6, 1},
 		InfoLevels{2, 250, 7, 2},
 		InfoLevels{3, 600, 4, 3},
@@ -152,7 +152,8 @@ public:
 	void handleEvents();
 	void update();
 	void disparar(Arrow* r);
-	bool colision(SDL_Rect* globoC);
+	bool colision( SDL_Rect* globoC);
+	bool colision(SDL_Rect* globoC, int& numHits);
 	void actualizaPuntuacion(int puntos);
 	void condicionFinDeJuego();
 	int returnPuntuacion();
