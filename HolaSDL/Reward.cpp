@@ -29,10 +29,12 @@ Reward::~Reward()
 
 void Reward::render() {
 	if (conBurbuja) {
-		textura->renderFrame(frameDestino, tipo_reward, estado_rotacion, 0, SDL_FLIP_NONE);
+		textura->renderFrame(frameDestino, tipo_reward, (estado_rotacion/VELOCIDAD_ROTACION_REWARD)%8, 0, SDL_FLIP_NONE);
 		burbuja->render(frameDestinoBurbuja, SDL_FLIP_NONE);
 	}
-	else textura->renderFrame(frameDestino, tipo_reward, estado_rotacion, 0, SDL_FLIP_NONE);
+	else textura->renderFrame(frameDestino, tipo_reward, (estado_rotacion / VELOCIDAD_ROTACION_REWARD) % 8, 0, SDL_FLIP_NONE);
+
+	estado_rotacion++;
 }
 
 void Reward::update() {
@@ -86,7 +88,6 @@ void Reward::handleEvent(SDL_Event& event) {
 		if (SDL_PointInRect(&punto,&frameDestinoBurbuja)) {
 			if (tipo_reward == 0) game->sumaFlechas();
 			else if (tipo_reward == 1) ;//paso de nivel
-			cout << "DESTRUCCCCIOOOONNNNN DE REWARD\n";
 			game->killObject(posicionEnEstructura);
 			game->killObjectEventHandler(posicionEnEventos);
 		}

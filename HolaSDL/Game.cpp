@@ -78,21 +78,21 @@ void Game::update() { //avisa a los objetos para que se actualicen
 
 	cout << "Obj: " << objetos.size() <<endl;
 	
-
-	for (list<list<EventHandler*>::iterator>::iterator it = objPenDestruccionEvent.begin(); it != objPenDestruccionEvent.end(); ++it) {
-		objPenDestruccionEvent.erase(it);
-
-	}
 	for (list<list<GameObject*>::iterator>::iterator it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
 		delete **it;
 		objetos.erase(*it);
 	}
 
+	for (list<list<EventHandler*>::iterator>::iterator it = objPenDestruccionEvent.begin(); it != objPenDestruccionEvent.end(); ++it) {
+		hEventsObjetos.erase(*it);
+
+	}
 
 	for (list<list<Arrow*>::iterator>::iterator it = flechasPenDestruccion.begin(); it != flechasPenDestruccion.end(); it++) {
 		flechasObjetos.erase(*it);
 	}
 
+	objPenDestruccionEvent.clear();
 	objPenDestruccion.clear();
 	flechasPenDestruccion.clear();
 	generaGlobo();

@@ -57,8 +57,8 @@ const double PI = 3.14159265;
 
 	//Rewards
 		const uint VELOCIDAD_CAIDA_REWARD = 1;
-		const uint VELOCIDAD_ROTACION_REWARD = 5;
-		const uint PROBABILIDAD_REWARD = 3;  //formula = 1/x
+		const uint VELOCIDAD_ROTACION_REWARD = 7;
+		const uint PROBABILIDAD_REWARD = 2;  //formula = 1/(x+1)
 		const uint SUMA_FLECHAS = 3;
 
 //UI
