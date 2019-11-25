@@ -86,10 +86,12 @@ void Reward::handleEvent(SDL_Event& event) {
 		punto.x = x;
 		punto.y = y;
 		if (SDL_PointInRect(&punto,&frameDestinoBurbuja)) {
-			if (tipo_reward == 0) game->sumaFlechas();
-			else if (tipo_reward == 1) ;//paso de nivel
-			game->killObject(posicionEnEstructura);
-			game->killObjectEventHandler(posicionEnEventos);
+			if (tipo_reward == 0) {
+				game->sumaFlechas();
+				game->killObject(posicionEnEstructura);
+				game->killObjectEventHandler(posicionEnEventos);
+			}
+			else if (tipo_reward == 1) game->pasoNivelReward(); //no se necesita xq si no peta y ya se esta eliminadno al pasar de nivel
 		}
 	}
 }

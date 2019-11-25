@@ -114,6 +114,8 @@ private:
 	GameObject* arco;
 	int puntuacion, numFlechas;
 	ScoreBoard* scoreBoard;
+
+	bool pasoNivelPorReward;
 		
 	vector<InfoTexture> texturesInfo = {
 	InfoTexture{"..\\images\\Arrow1.png", 1, 1},
@@ -123,7 +125,6 @@ private:
 	InfoTexture{"..\\images\\Bow2.png", 1, 1},
 	InfoTexture{"..\\images\\digits1.png", 1, 10},
 	InfoTexture{"..\\images\\butterfly2.png", 4, 10},
-
 	InfoTexture{"..\\images\\bg_spring_trees_1.png", 1, 1},
 	InfoTexture{"..\\images\\bg1.png", 1, 1},
 	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
@@ -135,7 +136,7 @@ private:
 	};
 
 	vector<InfoLevels> levelsInfo = {
-		InfoLevels{0, 50, 5, 0},
+		InfoLevels{0, 300, 5, 0},
 		InfoLevels{1, 100, 6, 1},
 		InfoLevels{2, 250, 7, 2},
 		InfoLevels{3, 600, 4, 3},
@@ -167,4 +168,5 @@ public:
 	void createReward(int x, int y);
 	void sumaFlechas();
 	void eliminaObjsUpdate();
+	void pasoNivelReward();
 };

@@ -35,6 +35,8 @@ Game::Game() {
 	puntuacion = 0; //puntuacion inicial
 
 	scoreBoard = new ScoreBoard(textures[digits], textures[arrowUI]); //creacion de la ui
+
+	pasoNivelPorReward = false;
 }
 
 Game::~Game() { //destructora
@@ -70,17 +72,16 @@ void Game::run() {
 }
 
 void Game::update() { //avisa a los objetos para que se actualicen
-	cout << "Obj: " << objetos.size() <<endl;	
+	//cout << "Obj: " << objetos.size() <<endl;	
 
 	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
 		(*it)->update();
 	}
 
-	objPenDestruccionEvent.clear();
 	eliminaObjsUpdate();
 	generaGlobo();
 	condicionFinDeJuego();
-	cambiaNivel();
+	if (puntuacion >= levelsInfo[nivelActual].puntosSigNivel || pasoNivelPorReward)cambiaNivel();
 }
 
 void Game::render()  const {
@@ -163,28 +164,36 @@ void Game::mataMariposa()
 	numMariposas--;
 }
 
+void Game::pasoNivelReward() {
+	pasoNivelPorReward = true; //es un flag para que pueda terminar las actualizaciones antes de cambiar de nivel
+}
+
 void Game::cambiaNivel()
 {
-	if (puntuacion>=levelsInfo[nivelActual].puntosSigNivel && nivelActual != NUMERO_NIVELES - 1) {
+	if (nivelActual != NUMERO_NIVELES - 1) {
 		nivelActual++;
 		list<GameObject*>::iterator it = objetos.begin();
 		++it;
+		//elimina todos los objetos
 		for (; it != objetos.end(); ++it) {
-			delete* it;			
+			delete* it;
 		}
 
-		hEventsObjetos.erase(++hEventsObjetos.begin(),hEventsObjetos.end());
+		//limpia todas las listas
+		hEventsObjetos.erase(++hEventsObjetos.begin(), hEventsObjetos.end());
 		objetos.erase(++objetos.begin(), objetos.end());
 		flechasObjetos.clear();
 		objPenDestruccion.clear();
 		flechasPenDestruccion.clear();
 
+		//crea los objetos para el proximo nivel
 		numMariposas = levelsInfo[nivelActual].nMariposas;
 		numFlechas += levelsInfo[nivelActual].flechasAlLlegar;
 		scoreBoard->actualizaFlechas(numFlechas);
 		generaMariposas(levelsInfo[nivelActual].nMariposas);
-	}
 
+		pasoNivelPorReward = false; //reestablece el valor
+	}
 }
 
 void Game::actualizaPuntuacion(int puntos) {
@@ -222,14 +231,14 @@ void Game::killObjectFlecha(list<Arrow*>::iterator it)
 
 
 void Game::createReward(int x, int y) {
-	int probabilidad = rand() % PROBABILIDAD_REWARD;
+	int probabilidad = rand() % PROBABILIDAD_REWARD; //genera una probabilidad
 	if (probabilidad == 1) {
-		Reward* rew = new Reward(textures[reward], this,textures[burbuja],x ,y);
+		Reward* rew = new Reward(textures[reward], this, textures[burbuja], x, y); //crea el reward
 		objetos.push_back(rew);
 		list<GameObject*>::iterator it = objetos.end();
 		rew->setItList(--it);
 		hEventsObjetos.push_back(rew);
-		list<EventHandler*>::iterator iter = hEventsObjetos.end();
+		list<EventHandler*>::iterator iter = hEventsObjetos.end(); //lo añade a las listas correspondientes para ser actualizado mas alante
 		rew->setItListEventHandler(--iter);
 	}
 }
@@ -259,6 +268,8 @@ void Game::eliminaObjsUpdate()
 		hEventsObjetos.erase(*it);
 	}
 
+	//limpia las listas
+	objPenDestruccionEvent.clear();
 	objPenDestruccion.clear();
 	flechasPenDestruccion.clear();
 
