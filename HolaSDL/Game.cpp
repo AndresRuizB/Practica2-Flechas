@@ -175,6 +175,7 @@ void Game::cambiaNivel()
 		objPenDestruccion.clear();
 		flechasPenDestruccion.clear();
 
+		numMariposas = levelsInfo[nivelActual].nMariposas;
 		numFlechas += levelsInfo[nivelActual].flechasAlLlegar;
 		scoreBoard->actualizaFlechas(numFlechas);
 		generaMariposas(levelsInfo[nivelActual].nMariposas);
