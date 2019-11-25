@@ -47,6 +47,7 @@ void Balloon::update() {	//devuelve true si el globo sigue vivo
 	if (momentoPinchado > (VELOCIDAD_ANIMACION_PINCHADO * 5)) {
 		game->actualizaPuntuacion(PUNTUACION_POR_GLOBO);
 		game->killObject(posicionEnEstructura);
+		game->createReward(posicion.GetX(), posicion.GetY());
 	}
 	else if (posicion.GetY() <= 0 ) { //si se ha salido o ha terminado la animacion de destruirse
 		game->killObject(posicionEnEstructura);

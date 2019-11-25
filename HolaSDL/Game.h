@@ -13,6 +13,7 @@
 #include "GameObject.h"
 #include "EventHandler.h"
 #include "Butterfly.h"
+#include "Reward.h"
 
 using uint = unsigned int;
 using namespace std;
@@ -54,6 +55,12 @@ const double PI = 3.14159265;
 		const uint FRAMES_MUERTA = 50;
 		const uint NUMERO_MARIPOSAS = 10;
 
+	//Rewards
+		const uint VELOCIDAD_CAIDA_REWARD = 1;
+		const uint VELOCIDAD_ROTACION_REWARD = 5;
+		const uint PROBABILIDAD_REWARD = 3;  //formula = 1/x
+		const uint SUMA_FLECHAS = 3;
+
 //UI
 const uint SEPARACION_FLECHAS_UI = 15;
 const uint SEPARACION_DIGITOS_UI = 30;
@@ -62,15 +69,17 @@ const uint TAMAÑO_HITBOX_Y = 5;
 
 
 //Texturas
-const uint NUM_TEXTURES = 8;
+const uint NUM_TEXTURES = 10;
 const uint ESCALA_ARCO = 3;
 const uint ESCALA_FLECHA = 3;
 const uint ESCALA_GLOBO = 40;
 const uint ESCALA_MARIPOSA = 7;
+const uint ESCALA_REWARD = 7;
+const uint ESCALA_BURBUJA = 4;
 
 const enum OBJETOS
 {
-	arrowPhysics, arrowUI, balloons, background1, bowCharged, bowUncharged, digits, butterflys,
+	arrowPhysics, arrowUI, balloons, background1, bowCharged, bowUncharged, digits, butterflys, reward, burbuja,
 };
 
 struct InfoTexture
@@ -91,6 +100,7 @@ private:
 	list<list<Arrow*>::iterator> flechasPenDestruccion;
 	list<EventHandler*> hEventsObjetos;
 	list<list<GameObject*>::iterator> objPenDestruccion;
+	list<list<EventHandler*>::iterator> objPenDestruccionEvent;
 
 
 
@@ -105,7 +115,9 @@ private:
 	InfoTexture{"..\\images\\Bow1.png", 1, 1},
 	InfoTexture{"..\\images\\Bow2.png", 1, 1},
 	InfoTexture{"..\\images\\digits1.png", 1, 10},
-	InfoTexture{"..\\images\\butterfly2.png", 4, 10}
+	InfoTexture{"..\\images\\butterfly2.png", 4, 10},
+	InfoTexture{"..\\images\\rewards.png",10,8},
+	InfoTexture{"..\\images\\bubble.png",1,1}
 	};
 
 public:
@@ -126,5 +138,8 @@ public:
 	void generaMariposas(int num);
 	void mataMariposa();
 	void killObject(list<GameObject*>::iterator it);
+	void killObjectEventHandler(list<EventHandler*>::iterator it);
 	void killObjectFlecha(list<Arrow*>::iterator it);
+	void createReward(int x, int y);
+	void sumaFlechas();
 };

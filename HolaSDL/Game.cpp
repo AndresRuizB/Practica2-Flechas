@@ -40,11 +40,11 @@ Game::~Game() { //destructora
 	delete arco;
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
 
-	for (list<GameObject*>::iterator it = objetos.begin(); it != --objetos.end(); ++it) {	//el arco se elimina a parte
+	for (list<GameObject*>::iterator it = ++objetos.begin(); it != objetos.end(); ++it) {	//el arco se elimina a parte (DONDE?)
 		delete *it;
-		objetos.erase(it);
 	}
 
+	objetos.clear();
 	delete scoreBoard;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -78,10 +78,16 @@ void Game::update() { //avisa a los objetos para que se actualicen
 
 	cout << "Obj: " << objetos.size() <<endl;
 	
+
+	for (list<list<EventHandler*>::iterator>::iterator it = objPenDestruccionEvent.begin(); it != objPenDestruccionEvent.end(); ++it) {
+		objPenDestruccionEvent.erase(it);
+
+	}
 	for (list<list<GameObject*>::iterator>::iterator it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
 		delete **it;
-		objetos.erase(*it);		
+		objetos.erase(*it);
 	}
+
 
 	for (list<list<Arrow*>::iterator>::iterator it = flechasPenDestruccion.begin(); it != flechasPenDestruccion.end(); it++) {
 		flechasObjetos.erase(*it);
@@ -197,8 +203,30 @@ void Game::killObject(list<GameObject*>::iterator it) {
 	objPenDestruccion.push_back(it); //añade el objeto a la destruccion
 }
 
+void Game::killObjectEventHandler(list<EventHandler*>::iterator it) {
+	objPenDestruccionEvent.push_back(it);
+}
+
 void Game::killObjectFlecha(list<Arrow*>::iterator it)
 {
 	flechasPenDestruccion.push_back(it);
 }
 
+void Game::createReward(int x, int y) {
+	int probabilidad = rand() % PROBABILIDAD_REWARD;
+	if (probabilidad == 1) {
+		Reward* rew = new Reward(textures[reward], this,textures[burbuja],x ,y);
+		objetos.push_back(rew);
+		list<GameObject*>::iterator it = objetos.end();
+		rew->setItList(--it);
+		hEventsObjetos.push_back(rew);
+		list<EventHandler*>::iterator iter = hEventsObjetos.end();
+		rew->setItListEventHandler(--iter);
+	}
+}
+
+
+void Game::sumaFlechas() {
+	numFlechas += SUMA_FLECHAS;
+	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
+}

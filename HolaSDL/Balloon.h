@@ -17,11 +17,9 @@ private:
 	bool pinchado = false, nuevoGlobo = false;
 	int momentoPinchado;
 	int globo; //que sprite de globo tiene
-
-
-public:
-
 	SDL_Rect frameDestino; //donde va a ser pintado
+
+public:	
 	Balloon(Texture* t, Game* g);
 	~Balloon();
 	void update();
