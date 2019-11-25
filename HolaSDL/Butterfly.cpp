@@ -12,10 +12,10 @@ using namespace std;
 Butterfly::Butterfly(Texture* t, Game* g)
 {
 	game = g;
-	int x = rand() % (LIMITE_DERECHO_MARIPOSAS - LIMITE_IZQUIERDO_MARIPOSAS) + LIMITE_IZQUIERDO_MARIPOSAS; 
+	int x = rand() % (LIMITE_DERECHO_MARIPOSAS - LIMITE_IZQUIERDO_MARIPOSAS) + LIMITE_IZQUIERDO_MARIPOSAS;
 	int y = rand() % (LIMITE_ABAJO_MARIPOSAS - LIMITE_ARRIBA_MARIPOSAS) + LIMITE_ARRIBA_MARIPOSAS;
-	posicion = Vector2D(x, y); 
-	int velY = rand() % 3, velX = rand() % 3 + 1; 
+	posicion = Vector2D(x, y);
+	int velY = rand() % 3, velX = rand() % 3 + 1;
 	direccion = Vector2D(velX * VELOCIDAD_MARIPOSA_X, velY * VELOCIDAD_MARIPOSA_Y);
 	ancho = t->getW();
 	alto = t->getH();
@@ -36,16 +36,14 @@ void Butterfly::update() {	//devuelve true si el globo sigue vivo
 		posicion = posicion + direccion; //calcula la proxima posicion segun su direccion
 
 		if (posicion.GetY() > LIMITE_ABAJO_MARIPOSAS || posicion.GetY() < LIMITE_ARRIBA_MARIPOSAS) {
-			direccion = Vector2D(1, -1) * direccion;
+			direccion = Vector2D(1, -1) * direccion + Vector2D(rand() % 2 - 1.0, 0);
 		}
 
 		if (posicion.GetX() > LIMITE_DERECHO_MARIPOSAS || posicion.GetX() < LIMITE_IZQUIERDO_MARIPOSAS) {
-			direccion = Vector2D(-1, 1) * direccion;
+			direccion = Vector2D(-1, 1) * direccion + Vector2D(0, rand() % 2 - 1.0);
 		}
 	}
 	else posicion = posicion + Vector2D(0, 1);
-
-
 
 	frameDestino.w = ancho / ESCALA_MARIPOSA; //su tamaño proporcional
 	frameDestino.h = alto / ESCALA_MARIPOSA; //estos dos valores nunca cambian
@@ -57,7 +55,7 @@ void Butterfly::update() {	//devuelve true si el globo sigue vivo
 		muerta = true;
 	}
 
-	if (tiempoMuerta>FRAMES_MUERTA) {
+	if (tiempoMuerta > FRAMES_MUERTA) {
 		game->actualizaPuntuacion(PUNTOS_POR_MARIPOSA);
 		game->killObject(posicionEnEstructura);
 		game->mataMariposa();
@@ -67,15 +65,9 @@ void Butterfly::update() {	//devuelve true si el globo sigue vivo
 
 
 void Butterfly::render() {
-	if (muerta)
-	{
-		textura->renderFrame(frameDestino, 0, (frame / VELOCIDAD_ANIMACION_MARIPOSAS) % 4, 0, SDL_FLIP_NONE); 
-		tiempoMuerta++;
-	}
-	else {
-		textura->renderFrame(frameDestino, 0, (frame/VELOCIDAD_ANIMACION_MARIPOSAS)%4, 0, SDL_FLIP_NONE);
-		frame++;
-	}
+	textura->renderFrame(frameDestino, 0, (frame / VELOCIDAD_ANIMACION_MARIPOSAS) % 4, 0, SDL_FLIP_NONE);
+	if (muerta)	tiempoMuerta++;
+	else frame++;
 }
 
 double Butterfly::returnY() {

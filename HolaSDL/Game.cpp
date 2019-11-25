@@ -28,7 +28,8 @@ Game::Game() {
 	objetos.push_back(arco);
 	hEventsObjetos.push_back(static_cast<Bow*>(arco));
 
-	numMariposas = NUMERO_MARIPOSAS;
+	numMariposas = levelsInfo[NIVEL_INICIAL].nMariposas;
+	nivelActual = NIVEL_INICIAL;
 
 	numFlechas = FLECHAS_INICIALES; //numero de flechas iniciales
 	puntuacion = 0; //puntuacion inicial
@@ -37,13 +38,11 @@ Game::Game() {
 }
 
 Game::~Game() { //destructora
-	delete arco;
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
 
-	for (list<GameObject*>::iterator it = ++objetos.begin(); it != objetos.end(); ++it) {	//el arco se elimina a parte (DONDE?)
-		delete *it;
+	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); it++) {	//el arco se elimina a parte (DONDE¿?)
+		delete* it;
 	}
-
 	objetos.clear();
 	delete scoreBoard;
 	SDL_DestroyRenderer(renderer);
@@ -55,7 +54,7 @@ void Game::run() {
 	int startTime, frameTime;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
 
-	generaMariposas(NUMERO_MARIPOSAS);
+	generaMariposas(levelsInfo[nivelActual].nMariposas);
 
 	while (!exit) { // mientras se este jugando
 		startTime = SDL_GetTicks();
@@ -71,40 +70,30 @@ void Game::run() {
 }
 
 void Game::update() { //avisa a los objetos para que se actualicen
-	
-	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {		
-		(*it)->update();
-	}
-
-	cout << "Obj: " << objetos.size() <<endl;
-	
-	for (list<list<GameObject*>::iterator>::iterator it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
-		delete **it;
-		objetos.erase(*it);
-	}
+	cout << "Obj: " << objetos.size() <<endl;	
 
 	for (list<list<EventHandler*>::iterator>::iterator it = objPenDestruccionEvent.begin(); it != objPenDestruccionEvent.end(); ++it) {
 		hEventsObjetos.erase(*it);
 
 	}
 
-	for (list<list<Arrow*>::iterator>::iterator it = flechasPenDestruccion.begin(); it != flechasPenDestruccion.end(); it++) {
-		flechasObjetos.erase(*it);
+	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
+		(*it)->update();
 	}
 
 	objPenDestruccionEvent.clear();
-	objPenDestruccion.clear();
-	flechasPenDestruccion.clear();
+	eliminaObjsUpdate();
 	generaGlobo();
 	condicionFinDeJuego();
+	cambiaNivel();
 }
 
-void Game::render()  const{
+void Game::render()  const {
 	SDL_RenderClear(renderer); //limpia la pantalla
 
-	SDL_RenderCopy(renderer, textures[background1]->getTexture(), nullptr, nullptr); //rendariza el fondo
+	SDL_RenderCopy(renderer, textures[nivelActual + 7]->getTexture(), nullptr, nullptr); //rendariza el fondo
 
-	for ( list<GameObject*>::const_iterator it = objetos.begin(); it != objetos.end(); ++it)(*it)->render();
+	for (list<GameObject*>::const_iterator it = objetos.begin(); it != objetos.end(); ++it)(*it)->render();
 
 	scoreBoard->render(); //renderiza la ui
 
@@ -150,8 +139,8 @@ bool Game::colision(SDL_Rect* globoC) {
 }
 
 void Game::condicionFinDeJuego() {
-	if (numFlechas <= 0 
-		&& flechasObjetos.size() == 0 
+	if (numFlechas <= 0
+		&& flechasObjetos.size() == 0
 		|| numMariposas <= 0) exit = true; //condicion de fin de juego
 }
 
@@ -177,6 +166,28 @@ void Game::generaMariposas(int num) {
 void Game::mataMariposa()
 {
 	numMariposas--;
+}
+
+void Game::cambiaNivel()
+{
+	if (puntuacion>=levelsInfo[nivelActual].puntosSigNivel && nivelActual != NUMERO_NIVELES - 1) {
+		nivelActual++;
+		list<GameObject*>::iterator it = objetos.begin();
+		++it;
+		for (; it != objetos.end(); ++it) {
+			delete* it;			
+		}
+		objetos.erase(++objetos.begin(), objetos.end());
+		flechasObjetos.clear();
+		objPenDestruccion.clear();
+		flechasPenDestruccion.clear();
+
+		numMariposas = levelsInfo[nivelActual].nMariposas;
+		numFlechas += levelsInfo[nivelActual].flechasAlLlegar;
+		scoreBoard->actualizaFlechas(numFlechas);
+		generaMariposas(levelsInfo[nivelActual].nMariposas);
+	}
+
 }
 
 void Game::actualizaPuntuacion(int puntos) {
@@ -212,6 +223,7 @@ void Game::killObjectFlecha(list<Arrow*>::iterator it)
 	flechasPenDestruccion.push_back(it);
 }
 
+
 void Game::createReward(int x, int y) {
 	int probabilidad = rand() % PROBABILIDAD_REWARD;
 	if (probabilidad == 1) {
@@ -229,4 +241,21 @@ void Game::createReward(int x, int y) {
 void Game::sumaFlechas() {
 	numFlechas += SUMA_FLECHAS;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
+}
+
+
+void Game::eliminaObjsUpdate()
+{
+	for (list<list<GameObject*>::iterator>::iterator it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
+		delete** it;
+		objetos.erase(*it);
+	}
+
+	for (list<list<Arrow*>::iterator>::iterator it = flechasPenDestruccion.begin(); it != flechasPenDestruccion.end(); it++) {
+		flechasObjetos.erase(*it);
+	}
+
+	objPenDestruccion.clear();
+	flechasPenDestruccion.clear();
+
 }

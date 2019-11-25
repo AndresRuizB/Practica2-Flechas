@@ -23,7 +23,8 @@ const uint WIN_WIDTH = 800;
 const uint WIN_HEIGHT = 600;
 const uint FRAME_RATE = 100;
 const double PI = 3.14159265;
-
+const uint NUMERO_NIVELES = 6;
+const uint NIVEL_INICIAL = 0;
 	//Arco
 		const uint VELOCIDAD_ARCO = 5;
 		const uint VEL_ROTACION_ARCO = 8;	//velocidad del giro del arco
@@ -36,12 +37,12 @@ const double PI = 3.14159265;
 		const uint OFFSET_HITBOX_FLECHA_Y = 10;
 
 	//globos
-		const uint VELOCIDAD_GLOBO = 3;
+		const uint VELOCIDAD_GLOBO = 2;
 		const uint LIMITE_IZQUIERDO_GLOBOS = 300;
 		const uint LIMITE_DERECHO_GLOBOS = 750;
 		const uint VELOCIDAD_ANIMACION_PINCHADO = 5;
 		const uint PUNTUACION_POR_GLOBO = 10;
-		const double PROBABILIDAD_GLOBO = 20;
+		const double PROBABILIDAD_GLOBO = 35;
 
 	//mariposas
 		const uint PUNTOS_POR_MARIPOSA = -5;
@@ -53,7 +54,6 @@ const double PI = 3.14159265;
 		const uint LIMITE_ABAJO_MARIPOSAS = 530;
 		const uint VELOCIDAD_ANIMACION_MARIPOSAS = 7;
 		const uint FRAMES_MUERTA = 50;
-		const uint NUMERO_MARIPOSAS = 10;
 
 	//Rewards
 		const uint VELOCIDAD_CAIDA_REWARD = 1;
@@ -64,12 +64,12 @@ const double PI = 3.14159265;
 //UI
 const uint SEPARACION_FLECHAS_UI = 15;
 const uint SEPARACION_DIGITOS_UI = 30;
-const uint TAMAÑO_HITBOX_X = 20;
-const uint TAMAÑO_HITBOX_Y = 5;
-
+const uint TAMAï¿½O_HITBOX_X = 20;
+const uint TAMAï¿½O_HITBOX_Y = 5;
 
 //Texturas
-const uint NUM_TEXTURES = 10;
+
+const uint NUM_TEXTURES = 15;
 const uint ESCALA_ARCO = 3;
 const uint ESCALA_FLECHA = 3;
 const uint ESCALA_GLOBO = 40;
@@ -79,13 +79,21 @@ const uint ESCALA_BURBUJA = 4;
 
 const enum OBJETOS
 {
-	arrowPhysics, arrowUI, balloons, background1, bowCharged, bowUncharged, digits, butterflys, reward, burbuja,
+	arrowPhysics, arrowUI, balloons, bowCharged, bowUncharged, digits, butterflys, background0, background1, background2, background3, background4, background5, reward, burbuja,
 };
 
 struct InfoTexture
 {
 	string direccion;
 	int columnas, filas;
+};
+
+struct InfoLevels
+{
+	int numero;
+	int puntosSigNivel;
+	int nMariposas;
+	int flechasAlLlegar;
 };
 
 class Game {
@@ -95,6 +103,7 @@ private:
 	bool exit = false;
 	Texture* textures[NUM_TEXTURES];
 	int numMariposas;
+	int nivelActual;
 	list<GameObject*> objetos;
 	list<Arrow*> flechasObjetos;
 	list<list<Arrow*>::iterator> flechasPenDestruccion;
@@ -102,22 +111,54 @@ private:
 	list<list<GameObject*>::iterator> objPenDestruccion;
 	list<list<EventHandler*>::iterator> objPenDestruccionEvent;
 
-
-
 	GameObject* arco;
 	int puntuacion, numFlechas;
 	ScoreBoard* scoreBoard;
+		
 	vector<InfoTexture> texturesInfo = {
 	InfoTexture{"..\\images\\Arrow1.png", 1, 1},
 	InfoTexture{"..\\images\\Arrow2.png", 1, 1},
 	InfoTexture{"..\\images\\balloons.png", 7, 6},
-	InfoTexture{"..\\images\\bg1.png", 1, 1},
 	InfoTexture{"..\\images\\Bow1.png", 1, 1},
 	InfoTexture{"..\\images\\Bow2.png", 1, 1},
 	InfoTexture{"..\\images\\digits1.png", 1, 10},
 	InfoTexture{"..\\images\\butterfly2.png", 4, 10},
+
+	InfoTexture{"..\\images\\bg_spring_trees_1.png", 1, 1},
+	InfoTexture{"..\\images\\bg1.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
 	InfoTexture{"..\\images\\rewards.png",10,8},
 	InfoTexture{"..\\images\\bubble.png",1,1}
+	};
+
+	/*
+	vector<InfoTexture> texturesInfo = {
+	InfoTexture{"..\\images\\bg1.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
+	InfoTexture{"..\\images\\digits1.png", 1, 10},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
+	InfoTexture{"..\\images\\bg_spring_trees_1.png", 1, 1},
+	InfoTexture{"..\\images\\bg1.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
+	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
+	};
+	*/
+
+	vector<InfoLevels> levelsInfo = {
+		InfoLevels{0, 10, 5, 0},
+		InfoLevels{1, 30, 6, 1},
+		InfoLevels{2, 250, 7, 2},
+		InfoLevels{3, 600, 4, 3},
+		InfoLevels{4, 1300, 3, 4},
+		InfoLevels{5, 99999, 1, 0},
 	};
 
 public:
@@ -137,9 +178,11 @@ public:
 	void generaGlobo();
 	void generaMariposas(int num);
 	void mataMariposa();
+	void cambiaNivel();
 	void killObject(list<GameObject*>::iterator it);
 	void killObjectEventHandler(list<EventHandler*>::iterator it);
 	void killObjectFlecha(list<Arrow*>::iterator it);
 	void createReward(int x, int y);
 	void sumaFlechas();
+	void eliminaObjsUpdate();
 };
