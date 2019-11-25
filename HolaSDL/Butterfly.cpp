@@ -65,7 +65,7 @@ void Butterfly::update() {	//devuelve true si el globo sigue vivo
 
 
 void Butterfly::render() {
-	textura->renderFrame(frameDestino, 0, (frame / VELOCIDAD_ANIMACION_MARIPOSAS) % 4, 0, SDL_FLIP_NONE);
+	textura->renderFrame(frameDestino, 0, 0, 0, SDL_FLIP_NONE);
 	if (muerta)	tiempoMuerta++;
 	else frame++;
 }
