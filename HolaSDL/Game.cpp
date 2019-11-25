@@ -72,11 +72,6 @@ void Game::run() {
 void Game::update() { //avisa a los objetos para que se actualicen
 	cout << "Obj: " << objetos.size() <<endl;	
 
-	for (list<list<EventHandler*>::iterator>::iterator it = objPenDestruccionEvent.begin(); it != objPenDestruccionEvent.end(); ++it) {
-		hEventsObjetos.erase(*it);
-
-	}
-
 	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
 		(*it)->update();
 	}
@@ -177,6 +172,8 @@ void Game::cambiaNivel()
 		for (; it != objetos.end(); ++it) {
 			delete* it;			
 		}
+
+		hEventsObjetos.erase(++hEventsObjetos.begin(),hEventsObjetos.end());
 		objetos.erase(++objetos.begin(), objetos.end());
 		flechasObjetos.clear();
 		objPenDestruccion.clear();
@@ -246,13 +243,20 @@ void Game::sumaFlechas() {
 
 void Game::eliminaObjsUpdate()
 {
+	//objetos pendientes de destruccion
 	for (list<list<GameObject*>::iterator>::iterator it = objPenDestruccion.begin(); it != objPenDestruccion.end(); ++it) {
 		delete** it;
 		objetos.erase(*it);
 	}
 
+	//flechas pendientes de destruccion
 	for (list<list<Arrow*>::iterator>::iterator it = flechasPenDestruccion.begin(); it != flechasPenDestruccion.end(); it++) {
 		flechasObjetos.erase(*it);
+	}
+
+	//rewards pendientes de destrucuion
+	for (list<list<EventHandler*>::iterator>::iterator it = objPenDestruccionEvent.begin(); it != objPenDestruccionEvent.end(); ++it) {
+		hEventsObjetos.erase(*it);
 	}
 
 	objPenDestruccion.clear();

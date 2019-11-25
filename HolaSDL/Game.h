@@ -64,8 +64,8 @@ const uint NIVEL_INICIAL = 0;
 //UI
 const uint SEPARACION_FLECHAS_UI = 15;
 const uint SEPARACION_DIGITOS_UI = 30;
-const uint TAMA�O_HITBOX_X = 20;
-const uint TAMA�O_HITBOX_Y = 5;
+const uint TAMANO_HITBOX_X = 20;
+const uint TAMANO_HITBOX_Y = 5;
 
 //Texturas
 
@@ -134,27 +134,9 @@ private:
 	InfoTexture{"..\\images\\bubble.png",1,1}
 	};
 
-	/*
-	vector<InfoTexture> texturesInfo = {
-	InfoTexture{"..\\images\\bg1.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
-	InfoTexture{"..\\images\\digits1.png", 1, 10},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
-	InfoTexture{"..\\images\\bg_spring_trees_1.png", 1, 1},
-	InfoTexture{"..\\images\\bg1.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
-	};
-	*/
-
 	vector<InfoLevels> levelsInfo = {
-		InfoLevels{0, 10, 5, 0},
-		InfoLevels{1, 30, 6, 1},
+		InfoLevels{0, 50, 5, 0},
+		InfoLevels{1, 100, 6, 1},
 		InfoLevels{2, 250, 7, 2},
 		InfoLevels{3, 600, 4, 3},
 		InfoLevels{4, 1300, 3, 4},

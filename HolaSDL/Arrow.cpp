@@ -59,8 +59,8 @@ SDL_Rect Arrow::getDestRect() { return SDL_Rect(); }
 
 SDL_Rect Arrow::getCollisionRect() {
 	SDL_Rect p;
-	p.w = TAMAÑO_HITBOX_X;
-	p.h = TAMAÑO_HITBOX_Y; //dimensiones de la hitbox
+	p.w = TAMANO_HITBOX_X;
+	p.h = TAMANO_HITBOX_Y; //dimensiones de la hitbox
 	p.x = posicion.GetX() + OFFSET_HITBOX_FLECHA_X;
 	p.y = posicion.GetY() + OFFSET_HITBOX_FLECHA_Y; //calcula la posicion de la punta
 	return p;
