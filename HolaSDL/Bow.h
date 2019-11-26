@@ -12,10 +12,11 @@ class Game;
 class Bow:public ArrowsGameObject, public EventHandler
 {
 private:
-	float velFlecha;
 	Arrow* flecha;
+
 	bool cargado;
 	double angulo;
+	float velFlecha;
 
 public:
 	Bow(Texture* t, Game* g);
@@ -29,7 +30,7 @@ public:
 	SDL_Rect getDestRect();
 	SDL_Rect getCollisionRect();
 	void loadFromFile();
-	void saveToFile();
+	void saveToFile(ofstream* output);
 	void setItList(list<GameObject*>::iterator it);
 };
 

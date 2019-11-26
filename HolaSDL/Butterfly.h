@@ -13,8 +13,7 @@ class Game;
 
 class Butterfly : public ArrowsGameObject
 {
-private:
-	
+private:	
 	int frame, tiempoMuerta; //para la animación
 	bool muerta;
 
@@ -29,6 +28,6 @@ public:
 	SDL_Rect getDestRect();
 	SDL_Rect getCollisionRect();
 	void loadFromFile();
-	void saveToFile();
+	void saveToFile(ofstream* output);
 	void setItList(list<GameObject*>::iterator it);
 };

@@ -1,10 +1,10 @@
 350 andre
-160 123456789123456789123456789123456789
-70 PIPO
-60 3
-25 pipo
-10 hola
-0 f
-0 h
-0 me cago en to esto no funciona
-0 h
+75 holaaaa
+-1 a
+-1 a
+-1 a
+-1 a
+-1 a
+-1 a
+-1 a
+-1 a

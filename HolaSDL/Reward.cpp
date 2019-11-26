@@ -6,6 +6,9 @@
 #include "Texture.h"
 #include "Vector2D.h"
 
+#include "Arrows_Excepciones.h"
+#include <fstream>
+
 
 Reward::Reward(Texture* t, Game* g, Texture* b, int x, int y)
 {
@@ -66,9 +69,17 @@ SDL_Rect Reward::getCollisionRect() {
 void Reward::loadFromFile() {
 
 }
-void Reward::saveToFile() {
 
+void Reward::saveToFile(ofstream* output) {
+	*output << "\nreward\n";
+	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << "tipo_reward " << tipo_reward << "\n";
+	*output << "estado_rotacion " << estado_rotacion << "\n";
+	*output << "conBurbuja " << conBurbuja << "\n";
 }
+
+
 void Reward::setItList(list<GameObject*>::iterator it) {
 	posicionEnEstructura = it;
 }

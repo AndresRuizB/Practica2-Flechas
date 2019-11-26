@@ -101,9 +101,8 @@ private:
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 	bool exit = false;
+	bool guardar = false;
 	Texture* textures[NUM_TEXTURES];
-	int numMariposas;
-	int nivelActual;
 	list<GameObject*> objetos;
 	list<Arrow*> flechasObjetos;
 	list<list<Arrow*>::iterator> flechasPenDestruccion;
@@ -111,8 +110,12 @@ private:
 	list<list<GameObject*>::iterator> objPenDestruccion;
 	list<list<EventHandler*>::iterator> objPenDestruccionEvent;
 
-	GameObject* arco;
+	//informacion a guardar
+	int numMariposas;
+	int nivelActual;
 	int puntuacion, numFlechas;
+
+	GameObject* arco;
 	ScoreBoard* scoreBoard;
 
 	bool pasoNivelPorReward;
@@ -147,7 +150,7 @@ private:
 public:
 	Game();
 	~Game();
-	void run();
+	bool run();
 	void render() const;
 	void handleEvents();
 	void update();
@@ -170,4 +173,5 @@ public:
 	void sumaFlechas();
 	void eliminaObjsUpdate();
 	void pasoNivelReward();
+	void guardarPartida();
 };

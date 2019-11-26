@@ -31,11 +31,14 @@ int main(int argc, char* argv[]) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	Game* game = new Game();
-	game->run();
-	int puntuacion = game->returnPuntuacion();
-	delete game;
-	try { manageRecords(puntuacion); }
-	catch (FileFormatError e) { cout << e.what(); }
-	catch (FileNotFoundError e) { cout << e.what(); }
+	   	 
+	if (!game->run()) {
+		int puntuacion = game->returnPuntuacion();
+		delete game;
+		try { manageRecords(puntuacion); }
+		catch (FileFormatError e) { cout << e.what(); }
+		catch (FileNotFoundError e) { cout << e.what(); }
+	}//devuelve true si se ha guardado la partida
+
 	return 0;
 }

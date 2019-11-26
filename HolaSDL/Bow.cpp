@@ -5,6 +5,8 @@
 #include "Arrow.h"
 #include "Game.h"
 #include <list>
+#include "Arrows_Excepciones.h"
+#include <fstream>
 
 using namespace std;
 
@@ -96,6 +98,14 @@ void Bow::disparar() {
 SDL_Rect Bow::getDestRect() { return SDL_Rect(); }
 SDL_Rect Bow::getCollisionRect() { return SDL_Rect(); }
 void Bow::loadFromFile() {}
-void Bow::saveToFile() {}
+
+void Bow::saveToFile(ofstream* output) {	
+	*output << "\nbow\n";
+	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << "cargado " << cargado << "\n";
+	*output << "angulo " << angulo << "\n";
+	*output << "velFlecha " << velFlecha << "\n";
+}
 
 void Bow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

@@ -8,6 +8,7 @@
 #include <iterator>
 #include <list>
 #include "Arrows_Excepciones.h"
+#include <fstream>
 
 using namespace std;
 
@@ -57,7 +58,7 @@ Game::~Game() { //destructora
 	SDL_Quit();
 }
 
-void Game::run() {
+bool Game::run() {
 	int startTime, frameTime;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
 
@@ -74,6 +75,10 @@ void Game::run() {
 		if (frameTime < (1000 / FRAME_RATE)) SDL_Delay((1000 / FRAME_RATE) - frameTime); //se actualiza según la constante FRAME_RATE 
 	} //bucle de juego
 
+
+	if (guardar) guardarPartida();
+
+	return guardar;
 }
 
 void Game::update() { //avisa a los objetos para que se actualicen
@@ -105,6 +110,11 @@ void Game::handleEvents() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
+		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s) {
+			cout << "Guardado xd";
+			exit = true;
+			guardar = true;
+		}
 		else {
 			for (list<EventHandler*>::iterator it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
 				(*it)->handleEvent(event);
@@ -245,7 +255,6 @@ void Game::killObjectFlecha(list<Arrow*>::iterator it)
 	flechasPenDestruccion.push_back(it);
 }
 
-
 void Game::createReward(int x, int y) {
 	int probabilidad = rand() % PROBABILIDAD_REWARD; //genera una probabilidad
 	if (probabilidad == 1) {
@@ -259,12 +268,10 @@ void Game::createReward(int x, int y) {
 	}
 }
 
-
 void Game::sumaFlechas() {
 	numFlechas += SUMA_FLECHAS;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
 }
-
 
 void Game::eliminaObjsUpdate()
 {
@@ -289,4 +296,28 @@ void Game::eliminaObjsUpdate()
 	objPenDestruccion.clear();
 	flechasPenDestruccion.clear();
 
+}
+
+void Game::guardarPartida() {
+	string numPartida;
+	cout << "Escribe el codigo de partida: ";
+	cin >> numPartida;
+
+
+	ofstream output;
+	output.open(numPartida+".txt");
+
+	if (output.fail()) throw FileNotFoundError("Error al guardar los records ", numPartida + ".txt");
+
+	output << "numMariposas " << numMariposas << "\n";
+	output << "nivelActual " << nivelActual << "\n";
+	output << "puntuacion " << puntuacion << "\n";
+	output << "numFlechas " << numFlechas << "\n";
+	output << "numObjetos " << objetos.size() << "\n";
+
+	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
+		(*it)->saveToFile(&output);
+	}
+
+	output.close();
 }

@@ -1,0 +1,72 @@
+numMariposas 4
+nivelActual 0
+puntuacion 0
+numFlechas 10
+numObjetos 9
+
+bow
+posicion 50 100
+direccion 0 0
+cargado 0
+angulo 0
+velFlecha 5
+
+butterfly
+posicion 373 505
+direccion 2 0.5
+frame 116
+timepoMuerta 0
+muerta 0
+
+butterfly
+posicion 617 354
+direccion -1 0
+frame 116
+timepoMuerta 0
+muerta 0
+
+butterfly
+posicion 392 97
+direccion -3 0
+frame 116
+timepoMuerta 0
+muerta 0
+
+butterfly
+posicion 473 455
+direccion -3 0.5
+frame 116
+timepoMuerta 0
+muerta 0
+
+baloon
+posicion 351 426
+direccion 0 -3
+pinchado 0
+momnetoPinchado 0
+globo 2
+globosPinchados 0
+
+baloon
+posicion 695 492
+direccion 0 -4
+pinchado 0
+momnetoPinchado 0
+globo 4
+globosPinchados 0
+
+baloon
+posicion 652 600
+direccion 0 -0
+pinchado 0
+momnetoPinchado 0
+globo 4
+globosPinchados 0
+
+baloon
+posicion 387 590
+direccion 0 -2
+pinchado 0
+momnetoPinchado 0
+globo 5
+globosPinchados 0

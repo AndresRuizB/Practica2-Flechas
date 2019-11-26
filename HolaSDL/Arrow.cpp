@@ -4,6 +4,8 @@
 #include "Texture.h"
 #include "Game.h"
 #include <list>
+#include "Arrows_Excepciones.h"
+#include <fstream>
 
 Arrow::Arrow(Texture* t, Game* g)
 {
@@ -69,7 +71,13 @@ SDL_Rect Arrow::getCollisionRect() {
 
 void Arrow::loadFromFile() {}
 
-void Arrow::saveToFile() {}
+void Arrow::saveToFile(ofstream* output) {
+	*output << "\narrow\n";
+	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << "numGlobosExplotados " << numGlobosExplotados << "\n";
+	*output << "angulo " << angulo << "\n";
+}
 
 void Arrow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }
 

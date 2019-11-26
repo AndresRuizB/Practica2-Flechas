@@ -15,12 +15,13 @@ class ArrowsGameObject : public GameObject {
 private:
 
 protected:
-	Vector2D posicion;
 	int ancho, alto;
-	Vector2D direccion;
 	Texture* textura;
 	Game* game;
 	list<GameObject*>::iterator posicionEnEstructura;
+
+	Vector2D posicion;
+	Vector2D direccion;
 
 public:
 	ArrowsGameObject();
@@ -31,7 +32,7 @@ public:
 	virtual SDL_Rect getDestRect() = 0;
 	virtual SDL_Rect getCollisionRect() = 0;
 	virtual void loadFromFile() = 0;
-	virtual void saveToFile() = 0;
+	virtual void saveToFile(ofstream* output) = 0;
 	virtual void setItList(list<GameObject*>::iterator it) = 0;
 
 };

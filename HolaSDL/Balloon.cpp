@@ -6,6 +6,8 @@
 #include "Texture.h"
 #include "Game.h"
 #include <list>
+#include "Arrows_Excepciones.h"
+#include <fstream>
 
 using namespace std;
 
@@ -75,5 +77,15 @@ double Balloon::returnY() {
 SDL_Rect Balloon::getDestRect() { return SDL_Rect(); }
 SDL_Rect Balloon::getCollisionRect() { return SDL_Rect(); }
 void Balloon::loadFromFile() {}
-void Balloon::saveToFile() {}
+
+void Balloon::saveToFile(ofstream* output) {
+	*output << "\nbaloon\n";
+	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << "pinchado " << pinchado << "\n";
+	*output << "momnetoPinchado " << momentoPinchado << "\n";
+	*output << "globo " << globo << "\n";
+	*output << "globosPinchados " << globosPinchados << "\n"; //globosPinchadosTemp empieza siempre en 0
+}
+
 void Balloon::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

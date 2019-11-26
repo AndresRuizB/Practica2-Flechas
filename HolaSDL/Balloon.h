@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "ArrowsGameObject.h"
 #include <list>
+#include <fstream>
 
 using namespace std;
 
@@ -13,10 +14,11 @@ class Game;
 
 class Balloon : public ArrowsGameObject
 {
-private:
+private:					//se puede quitar¿?
 	bool pinchado = false, nuevoGlobo = false;
 	int momentoPinchado;
 	int globo; //que sprite de globo tiene
+
 	SDL_Rect frameDestino; //donde va a ser pintado
 	int globosPinchadosTemp, globosPinchados;
 
@@ -29,6 +31,6 @@ public:
 	SDL_Rect getDestRect();
 	SDL_Rect getCollisionRect();
 	void loadFromFile();
-	void saveToFile();
+	void saveToFile(ofstream* output);
 	void setItList(list<GameObject*>::iterator it);
 };

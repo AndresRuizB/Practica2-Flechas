@@ -18,9 +18,10 @@ private:
 	Vector2D posicion, direccion;
 	SDL_Rect frameDestino; //donde va a ser pintado
 	SDL_Rect frameDestinoBurbuja; //donde va a ser pintado
+	list<EventHandler*>::iterator posicionEnEventos;
+
 	int tipo_reward, estado_rotacion;
 	bool conBurbuja;
-	list<EventHandler*>::iterator posicionEnEventos;
 	
 public:
 	Reward(Texture* t, Game* g, Texture* b, int x, int y);
@@ -30,7 +31,7 @@ public:
 	virtual SDL_Rect getDestRect();
 	virtual SDL_Rect getCollisionRect();
 	virtual void loadFromFile();
-	virtual void saveToFile();
+	virtual void saveToFile(ofstream* output);
 	virtual void setItList(list<GameObject*>::iterator it);
 	virtual void setItListEventHandler(list<EventHandler*>::iterator it);
 

@@ -77,6 +77,13 @@ double Butterfly::returnY() {
 SDL_Rect Butterfly::getDestRect() { return SDL_Rect(); }
 SDL_Rect Butterfly::getCollisionRect() { return SDL_Rect(); }
 void Butterfly::loadFromFile() {}
-void Butterfly::saveToFile() {}
+void Butterfly::saveToFile(ofstream* output) {
+	*output << "\nbutterfly\n";
+	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << "frame " << frame << "\n";
+	*output << "timepoMuerta " << tiempoMuerta << "\n";
+	*output << "muerta " << muerta << "\n";
+}
 
 void Butterfly::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }
