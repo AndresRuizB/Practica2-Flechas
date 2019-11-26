@@ -51,11 +51,17 @@ void Reward::update() {
 	frameDestinoBurbuja = frameDestino;
 	frameDestinoBurbuja.w = ancho / ESCALA_BURBUJA;
 	frameDestinoBurbuja.h = alto / ESCALA_BURBUJA;
-	frameDestinoBurbuja.x -= 17;
-	frameDestinoBurbuja.y -= 12;  //VALORES MAGICOS
+	frameDestinoBurbuja.x += OFFSET_SPAWN_REWARD_X;
+	frameDestinoBurbuja.y += OFFSET_SPAWN_REWARD_Y;  //VALORES MAGICOS
 
 
 	if (game->colision(&frameDestinoBurbuja))conBurbuja = false;
+
+	if (posicion.GetY() > WIN_HEIGHT) {
+		game->killObject(posicionEnEstructura);
+		game->killObjectEventHandler(posicionEnEventos);
+	}
+
 }
 
 

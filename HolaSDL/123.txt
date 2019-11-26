@@ -1,43 +1,43 @@
 game
 4
 0
-60
-7
+10
+9
 
 bow
-50 165
+50 185
 0 0
 0
 0
 5
 
 butterfly
-posicion 377 320
-direccion 2 2.5
-frame 720
-timepoMuerta 0
-muerta 0
+211 112.5
+2 2.5
+637
+0
+0
 
 butterfly
-posicion 185 354
-direccion 1 0
-frame 720
-timepoMuerta 0
-muerta 0
+102 351
+1 -1
+637
+0
+0
 
 butterfly
-posicion 196 154
-direccion -2 0
-frame 720
-timepoMuerta 0
-muerta 0
+161 303
+3 0
+637
+0
+0
 
 butterfly
-posicion 329 0
-direccion 3 -1.5
-frame 720
-timepoMuerta 0
-muerta 0
+116 124.5
+-3 -1.5
+637
+0
+0
 
 baloon
 652 600
@@ -48,7 +48,7 @@ baloon
 0
 
 baloon
-396 20
+396 103
 0 -1
 0
 0
@@ -56,29 +56,30 @@ baloon
 0
 
 baloon
-619 111
+619 194
 0 -1
 0
 0
 0
 0
 
-reward
-351 505
-0 1
+baloon
+354 600
+0 -0
 0
-454
+0
+5
 0
 
 reward
-744 456
+387 483
 0 1
 0
-388
-0
+295
+1
 
 baloon
-572 233
+572 315
 0 -1
 0
 0
@@ -94,7 +95,15 @@ baloon
 0
 
 baloon
-625 258
+692 36
+0 -2
+0
+0
+2
+0
+
+baloon
+625 340
 0 -1
 0
 0
@@ -110,29 +119,23 @@ baloon
 0
 
 baloon
-376 303
+376 384
 0 -1
 0
 0
 3
 0
 
-reward
-457 438
-0 1
-1
-280
-1
-
-reward
-599 471
-0 1
-1
-271
-1
+baloon
+527 600
+0 -0
+0
+0
+0
+0
 
 baloon
-667 110
+667 276
 0 -2
 0
 0
@@ -140,7 +143,7 @@ baloon
 0
 
 baloon
-382 270
+382 436
 0 -2
 0
 0
@@ -156,32 +159,9 @@ baloon
 0
 
 baloon
-421 180
+421 512
 0 -4
 0
 0
 0
-0
-
-baloon
-465 438
-0 -3
-0
-0
-3
-0
-
-arrow
-270 220
-0 0
-0
-0
-20
-
-baloon
-405 590
-0 -1
-0
-0
-1
 0

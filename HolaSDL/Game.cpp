@@ -15,11 +15,11 @@ using namespace std;
 Game::Game() {
 	// We ﬁrst initialize SDL
 	try {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("Ejercicio 3 SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (window == nullptr || renderer == nullptr)  throw SDLError("No se creo la ventana o el renderer correctamente");
+		SDL_Init(SDL_INIT_EVERYTHING);
+		window = SDL_CreateWindow("Ejercicio 3 SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		if (window == nullptr || renderer == nullptr)  throw SDLError("No se creo la ventana o el renderer correctamente");
 	}
 	catch (SDLError& e) { cout << e.what() << endl; }
 	catch (exception& e) { cout << e.what() << endl; }
@@ -62,7 +62,7 @@ bool Game::run() {
 	int startTime, frameTime;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
 
-	if(!haSigoCargado)generaMariposas(levelsInfo[nivelActual].nMariposas);
+	if (!haSigoCargado)generaMariposas(levelsInfo[nivelActual].nMariposas);
 
 	while (!exit) { // mientras se este jugando
 		startTime = SDL_GetTicks();
@@ -139,7 +139,7 @@ void Game::disparar(Arrow* r) {
 }
 
 bool Game::colision(SDL_Rect* globoC, int& numHits) {
-	bool colision = false;	
+	bool colision = false;
 	list<Arrow*>::iterator it = flechasObjetos.begin();
 	while (!colision && it != flechasObjetos.end()) { //mientras no hay colision y siguen quedando flechas por revisar
 		colision = SDL_HasIntersection(globoC, &(*it)->getCollisionRect()); //mira si hay colision
@@ -304,7 +304,7 @@ void Game::guardarPartida() {
 
 
 	ofstream output;
-	output.open(numPartida+".txt");
+	output.open(numPartida + ".txt");
 
 	if (output.fail()) throw FileNotFoundError("Error al guardar los records ", numPartida + ".txt");
 
@@ -329,7 +329,7 @@ void Game::cargarPartida(string file) {
 	if (input.fail()) throw FileNotFoundError("Error al cargar los records ", file);
 
 	string line;
-	
+
 	while (input >> line) {
 
 		if (line == "game") {
@@ -371,6 +371,13 @@ void Game::cargarPartida(string file) {
 			rew->setItListEventHandler(--iter);
 
 			rew->loadFromFile(&input);
+		}
+		else if (line == "butterfly") {
+			Butterfly* bfly = new Butterfly(textures[butterflys], this);
+			objetos.push_back(bfly);
+			list<GameObject*>::iterator it = objetos.end();
+			bfly->setItList(--it);
+			bfly->loadFromFile(&input);
 		}
 	}
 
