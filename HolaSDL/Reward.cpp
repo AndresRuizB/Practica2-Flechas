@@ -18,7 +18,7 @@ Reward::Reward(Texture* t, Game* g, Texture* b, int x, int y)
 	posicion = Vector2D(x, y);
 	direccion = Vector2D(0, VELOCIDAD_CAIDA_REWARD);
 	frameDestino = SDL_Rect{};
-	tipo_reward = rand() % 2;
+	tipo_reward = rand() % NUMERO_DE_REWARDS;
 	estado_rotacion = 0;
 	ancho = t->getW();
 	alto = t->getH();
@@ -113,12 +113,12 @@ void Reward::handleEvent(SDL_Event& event) {
 		punto.x = x;
 		punto.y = y;
 		if (SDL_PointInRect(&punto,&frameDestinoBurbuja)) {
-			if (tipo_reward == 0) {
-				game->sumaFlechas();
-				game->killObject(posicionEnEstructura);
-				game->killObjectEventHandler(posicionEnEventos);
-			}
+			if (tipo_reward == 0) game->sumaFlechas();
 			else if (tipo_reward == 1) game->pasoNivelReward(); //no se necesita xq si no peta y ya se esta eliminadno al pasar de nivel
+			else if (tipo_reward == 2) game->crearButterfly();
+
+			game->killObject(posicionEnEstructura);
+			game->killObjectEventHandler(posicionEnEventos);
 		}
 	}
 }

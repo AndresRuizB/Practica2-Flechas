@@ -177,12 +177,17 @@ void Game::generaGlobo() {
 
 void Game::generaMariposas(int num) {
 	for (int i = 0; i < num; i++) {
-		Butterfly* bfly = new Butterfly(textures[butterflys], this);
-		objetos.push_back(bfly);
-		list<GameObject*>::iterator it = objetos.end();
-		bfly->setItList(--it);
+		crearButterfly();
 	}
 }
+
+void Game::crearButterfly() {
+	Butterfly* bfly = new Butterfly(textures[butterflys], this);
+	objetos.push_back(bfly);
+	list<GameObject*>::iterator it = objetos.end();
+	bfly->setItList(--it);
+}
+
 
 void Game::mataMariposa()
 {

@@ -31,7 +31,7 @@ const uint NIVEL_INICIAL = 0;
 
 	//flechas
 		const uint FLECHAS_INICIALES = 10;
-		const uint VELOCIDAD_FLECHA = 1;
+		const uint VELOCIDAD_FLECHA = 5;
 		const uint VELOCIDAD_FLECHA_MAX = 20;
 		const uint OFFSET_HITBOX_FLECHA_X = 108;
 		const uint OFFSET_HITBOX_FLECHA_Y = 10;
@@ -62,6 +62,7 @@ const uint NIVEL_INICIAL = 0;
 		const uint SUMA_FLECHAS = 3;
 		const uint OFFSET_SPAWN_REWARD_X = -17;
 		const uint OFFSET_SPAWN_REWARD_Y = -12;
+		const uint NUMERO_DE_REWARDS = 3;
 
 //UI
 const uint SEPARACION_FLECHAS_UI = 15;
@@ -178,4 +179,5 @@ public:
 	void pasoNivelReward();
 	void guardarPartida();
 	void cargarPartida(string file);
+	void crearButterfly();
 };
