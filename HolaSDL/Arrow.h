@@ -8,11 +8,11 @@
 class Arrow:public ArrowsGameObject
 {
 private:	
-	int  velocidad;
 	Texture* textura;
 	Game* game;
 	list<Arrow*>::iterator posEnEstrFlechas;
 
+	int  velocidad;
 	int numGlobosExplotados;
 	double angulo;
 
@@ -26,7 +26,7 @@ public:
 	void estableceAng(double ang);
 	SDL_Rect getDestRect();
 	SDL_Rect getCollisionRect();
-	void loadFromFile();
+	void loadFromFile(ifstream* input);
 	void saveToFile(ofstream* output);
 	void setItList(list<GameObject*>::iterator it);
 	void setItListFlechas(list<Arrow*>::iterator it);

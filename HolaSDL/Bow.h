@@ -29,7 +29,7 @@ public:
 	void disparar();
 	SDL_Rect getDestRect();
 	SDL_Rect getCollisionRect();
-	void loadFromFile();
+	void loadFromFile(ifstream* input);
 	void saveToFile(ofstream* output);
 	void setItList(list<GameObject*>::iterator it);
 };

@@ -76,16 +76,30 @@ double Balloon::returnY() {
 
 SDL_Rect Balloon::getDestRect() { return SDL_Rect(); }
 SDL_Rect Balloon::getCollisionRect() { return SDL_Rect(); }
-void Balloon::loadFromFile() {}
+
+
+void Balloon::loadFromFile(ifstream* input) {
+	int x, y;
+	*input >> x;
+	*input >> y;
+	posicion = Vector2D(x, y);
+	*input >> x;
+	*input >> y;
+	direccion = Vector2D(x, y);
+	*input >> pinchado;
+	*input >> momentoPinchado;
+	*input >> globo;
+	*input >> globosPinchados;
+}
 
 void Balloon::saveToFile(ofstream* output) {
 	*output << "\nbaloon\n";
-	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
-	*output << "pinchado " << pinchado << "\n";
-	*output << "momnetoPinchado " << momentoPinchado << "\n";
-	*output << "globo " << globo << "\n";
-	*output << "globosPinchados " << globosPinchados << "\n"; //globosPinchadosTemp empieza siempre en 0
+	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << pinchado << "\n";
+	*output << momentoPinchado << "\n";
+	*output << globo << "\n";
+	*output << globosPinchados << "\n"; //globosPinchadosTemp empieza siempre en 0
 }
 
 void Balloon::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

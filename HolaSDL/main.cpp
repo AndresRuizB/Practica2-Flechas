@@ -16,7 +16,7 @@ void manageRecords(int puntuaicon) { //se procesa todo el tema de los records
 	scores->load("top.txt"); //carga todos los records anteriores de archivo
 	string name;
 	cout << "\n\nCual es tu nombre: \n";
-	getline(cin, name);
+	cin >> name;
 	if (scores->addScore(name, puntuaicon)) { //si has entrado en el top actualiza el archivo
 		scores->save("top.txt");
 	}
@@ -31,7 +31,20 @@ int main(int argc, char* argv[]) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	Game* game = new Game();
-	   	 
+	
+	int resp;
+	cout << "Que quieres: jugar(1) o cargar partida(2)\n";
+	cin >> resp;
+
+	if (resp == 2) {
+		string archivo;
+		cout << "Dime el codigo de tu archivo: ";
+		cin >> archivo;
+		try { game->cargarPartida(archivo + ".txt"); }
+		catch (FileNotFoundError e) { cout << e.what(); }
+		//cargar parida
+	}
+	
 	if (!game->run()) {
 		int puntuacion = game->returnPuntuacion();
 		delete game;

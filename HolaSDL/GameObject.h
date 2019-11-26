@@ -21,6 +21,6 @@ public:
 	virtual void update() = 0;
 	//es comun para todos
 	virtual void saveToFile(ofstream* output) = 0;
-	virtual void loadFromFile() = 0;
+	virtual void loadFromFile(ifstream* input) = 0;
 };
 

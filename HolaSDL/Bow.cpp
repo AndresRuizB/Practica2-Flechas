@@ -97,15 +97,28 @@ void Bow::disparar() {
 
 SDL_Rect Bow::getDestRect() { return SDL_Rect(); }
 SDL_Rect Bow::getCollisionRect() { return SDL_Rect(); }
-void Bow::loadFromFile() {}
+
+void Bow::loadFromFile(ifstream* input) {
+	int x, y;
+	*input >> x;
+	*input >> y;
+	posicion = Vector2D(x, y);
+	*input >> x;
+	*input >> y;
+	direccion = Vector2D(x, y);
+	*input >> cargado;
+	*input >> angulo;
+	*input >> velFlecha;
+	if (cargado) cambioTextura(game->returnPuntTextura(bowCharged));
+}
 
 void Bow::saveToFile(ofstream* output) {	
 	*output << "\nbow\n";
-	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
-	*output << "cargado " << cargado << "\n";
-	*output << "angulo " << angulo << "\n";
-	*output << "velFlecha " << velFlecha << "\n";
+	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << cargado << "\n";
+	*output << angulo << "\n";
+	*output << velFlecha << "\n";
 }
 
 void Bow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

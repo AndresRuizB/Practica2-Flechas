@@ -1,72 +1,187 @@
-numMariposas 4
-nivelActual 0
-puntuacion 0
-numFlechas 10
-numObjetos 9
+game
+4
+0
+60
+7
 
 bow
-posicion 50 100
-direccion 0 0
-cargado 0
-angulo 0
-velFlecha 5
+50 165
+0 0
+0
+0
+5
 
 butterfly
-posicion 373 505
-direccion 2 0.5
-frame 116
+posicion 377 320
+direccion 2 2.5
+frame 720
 timepoMuerta 0
 muerta 0
 
 butterfly
-posicion 617 354
-direccion -1 0
-frame 116
+posicion 185 354
+direccion 1 0
+frame 720
 timepoMuerta 0
 muerta 0
 
 butterfly
-posicion 392 97
-direccion -3 0
-frame 116
+posicion 196 154
+direccion -2 0
+frame 720
 timepoMuerta 0
 muerta 0
 
 butterfly
-posicion 473 455
-direccion -3 0.5
-frame 116
+posicion 329 0
+direccion 3 -1.5
+frame 720
 timepoMuerta 0
 muerta 0
 
 baloon
-posicion 351 426
-direccion 0 -3
-pinchado 0
-momnetoPinchado 0
-globo 2
-globosPinchados 0
+652 600
+0 -0
+0
+0
+4
+0
 
 baloon
-posicion 695 492
-direccion 0 -4
-pinchado 0
-momnetoPinchado 0
-globo 4
-globosPinchados 0
+396 20
+0 -1
+0
+0
+0
+0
 
 baloon
-posicion 652 600
-direccion 0 -0
-pinchado 0
-momnetoPinchado 0
-globo 4
-globosPinchados 0
+619 111
+0 -1
+0
+0
+0
+0
+
+reward
+351 505
+0 1
+0
+454
+0
+
+reward
+744 456
+0 1
+0
+388
+0
 
 baloon
-posicion 387 590
-direccion 0 -2
-pinchado 0
-momnetoPinchado 0
-globo 5
-globosPinchados 0
+572 233
+0 -1
+0
+0
+3
+0
+
+baloon
+732 600
+0 -0
+0
+0
+5
+0
+
+baloon
+625 258
+0 -1
+0
+0
+4
+0
+
+baloon
+557 600
+0 -0
+0
+0
+5
+0
+
+baloon
+376 303
+0 -1
+0
+0
+3
+0
+
+reward
+457 438
+0 1
+1
+280
+1
+
+reward
+599 471
+0 1
+1
+271
+1
+
+baloon
+667 110
+0 -2
+0
+0
+3
+0
+
+baloon
+382 270
+0 -2
+0
+0
+5
+0
+
+baloon
+334 600
+0 -0
+0
+0
+0
+0
+
+baloon
+421 180
+0 -4
+0
+0
+0
+0
+
+baloon
+465 438
+0 -3
+0
+0
+3
+0
+
+arrow
+270 220
+0 0
+0
+0
+20
+
+baloon
+405 590
+0 -1
+0
+0
+1
+0

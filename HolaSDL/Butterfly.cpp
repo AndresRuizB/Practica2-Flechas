@@ -76,7 +76,9 @@ double Butterfly::returnY() {
 
 SDL_Rect Butterfly::getDestRect() { return SDL_Rect(); }
 SDL_Rect Butterfly::getCollisionRect() { return SDL_Rect(); }
-void Butterfly::loadFromFile() {}
+
+void Butterfly::loadFromFile(ifstream* input) {}
+
 void Butterfly::saveToFile(ofstream* output) {
 	*output << "\nbutterfly\n";
 	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";

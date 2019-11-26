@@ -62,7 +62,7 @@ bool Game::run() {
 	int startTime, frameTime;
 	scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
 
-	generaMariposas(levelsInfo[nivelActual].nMariposas);
+	if(!haSigoCargado)generaMariposas(levelsInfo[nivelActual].nMariposas);
 
 	while (!exit) { // mientras se este jugando
 		startTime = SDL_GetTicks();
@@ -111,7 +111,6 @@ void Game::handleEvents() {
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
 		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s) {
-			cout << "Guardado xd";
 			exit = true;
 			guardar = true;
 		}
@@ -309,15 +308,73 @@ void Game::guardarPartida() {
 
 	if (output.fail()) throw FileNotFoundError("Error al guardar los records ", numPartida + ".txt");
 
-	output << "numMariposas " << numMariposas << "\n";
-	output << "nivelActual " << nivelActual << "\n";
-	output << "puntuacion " << puntuacion << "\n";
-	output << "numFlechas " << numFlechas << "\n";
-	output << "numObjetos " << objetos.size() << "\n";
+	output << "game\n";
+	output << numMariposas << "\n";
+	output << nivelActual << "\n";
+	output << puntuacion << "\n";
+	output << numFlechas << "\n";
+	//output << objetos.size() << "\n";
 
 	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); ++it) {
 		(*it)->saveToFile(&output);
 	}
 
 	output.close();
+}
+
+void Game::cargarPartida(string file) {
+	ifstream input;
+	input.open(file);
+
+	if (input.fail()) throw FileNotFoundError("Error al cargar los records ", file);
+
+	string line;
+	
+	while (input >> line) {
+
+		if (line == "game") {
+			input >> numMariposas;
+			input >> nivelActual;
+			input >> puntuacion;
+			input >> numFlechas;
+		}
+		else if (line == "bow") {
+			arco->loadFromFile(&input);
+		}
+		else if (line == "baloon") {
+			Balloon* glo = new Balloon(textures[balloons], this); //crea el globo		
+			objetos.push_back(glo); //añade el globo al vector
+			list<GameObject*>::iterator it = objetos.end();
+			glo->setItList(--it);
+			glo->loadFromFile(&input);
+		}
+		else if (line == "arrow") {
+			Arrow* r = new Arrow(returnPuntTextura(arrowPhysics), this);
+			objetos.push_back(r); //lista gameobjects
+			list<GameObject*>::iterator it = objetos.end();
+			r->setItList(--it);
+
+			flechasObjetos.push_back(r);//lista flechas
+			list<Arrow*>::iterator itF = flechasObjetos.end();
+			r->setItListFlechas(--itF);
+
+			r->loadFromFile(&input);
+
+		}
+		else if (line == "reward") {
+			Reward* rew = new Reward(textures[reward], this, textures[burbuja], 0, 0); //crea el reward
+			objetos.push_back(rew);
+			list<GameObject*>::iterator it = objetos.end();
+			rew->setItList(--it);
+			hEventsObjetos.push_back(rew);
+			list<EventHandler*>::iterator iter = hEventsObjetos.end(); //lo añade a las listas correspondientes para ser actualizado mas alante
+			rew->setItListEventHandler(--iter);
+
+			rew->loadFromFile(&input);
+		}
+	}
+
+	input.close();
+
+	haSigoCargado = true; //dice si se ha cargado la partida
 }

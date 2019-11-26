@@ -69,14 +69,26 @@ SDL_Rect Arrow::getCollisionRect() {
 	return p;
 }
 
-void Arrow::loadFromFile() {}
+void Arrow::loadFromFile(ifstream* input) {
+	int x, y;
+	*input >> x;
+	*input >> y;
+	posicion = Vector2D(x, y);
+	*input >> x;
+	*input >> y;
+	direccion = Vector2D(x, y);
+	*input >> numGlobosExplotados;
+	*input >> angulo;
+	*input >> velocidad;
+}
 
 void Arrow::saveToFile(ofstream* output) {
 	*output << "\narrow\n";
-	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
-	*output << "numGlobosExplotados " << numGlobosExplotados << "\n";
-	*output << "angulo " << angulo << "\n";
+	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << numGlobosExplotados << "\n";
+	*output << angulo << "\n";
+	*output << velocidad << "\n";
 }
 
 void Arrow::setItList(list<GameObject*>::iterator it) { posicionEnEstructura = it; }

@@ -102,6 +102,7 @@ private:
 	SDL_Renderer* renderer = nullptr;
 	bool exit = false;
 	bool guardar = false;
+	bool haSigoCargado = false;
 	Texture* textures[NUM_TEXTURES];
 	list<GameObject*> objetos;
 	list<Arrow*> flechasObjetos;
@@ -144,7 +145,7 @@ private:
 		InfoLevels{2, 250, 7, 2},
 		InfoLevels{3, 600, 4, 3},
 		InfoLevels{4, 1300, 3, 4},
-		InfoLevels{5, 99999, 1, 0},
+		InfoLevels{5, 99999, 1, 20},
 	};
 
 public:
@@ -174,4 +175,5 @@ public:
 	void eliminaObjsUpdate();
 	void pasoNivelReward();
 	void guardarPartida();
+	void cargarPartida(string file);
 };

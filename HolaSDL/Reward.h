@@ -30,7 +30,7 @@ public:
 	virtual void update();
 	virtual SDL_Rect getDestRect();
 	virtual SDL_Rect getCollisionRect();
-	virtual void loadFromFile();
+	virtual void loadFromFile(ifstream* input);
 	virtual void saveToFile(ofstream* output);
 	virtual void setItList(list<GameObject*>::iterator it);
 	virtual void setItListEventHandler(list<EventHandler*>::iterator it);

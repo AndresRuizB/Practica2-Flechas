@@ -31,7 +31,7 @@ public:
 	virtual void update() = 0;
 	virtual SDL_Rect getDestRect() = 0;
 	virtual SDL_Rect getCollisionRect() = 0;
-	virtual void loadFromFile() = 0;
+	virtual void loadFromFile(ifstream* input) = 0;
 	virtual void saveToFile(ofstream* output) = 0;
 	virtual void setItList(list<GameObject*>::iterator it) = 0;
 

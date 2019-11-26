@@ -66,17 +66,27 @@ SDL_Rect Reward::getDestRect() {
 SDL_Rect Reward::getCollisionRect() {
 	return SDL_Rect();
 }
-void Reward::loadFromFile() {
+void Reward::loadFromFile(ifstream* input) {
+	int x, y;
+	*input >> x;
+	*input >> y;
+	posicion = Vector2D(x, y);
+	*input >> x;
+	*input >> y;
+	direccion = Vector2D(x, y);
+	*input >> tipo_reward;
+	*input >> estado_rotacion;
+	*input >> conBurbuja;
 
 }
 
 void Reward::saveToFile(ofstream* output) {
 	*output << "\nreward\n";
-	*output << "posicion " << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << "direccion " << direccion.GetX() << " " << direccion.GetY() << "\n";
-	*output << "tipo_reward " << tipo_reward << "\n";
-	*output << "estado_rotacion " << estado_rotacion << "\n";
-	*output << "conBurbuja " << conBurbuja << "\n";
+	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
+	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	*output << tipo_reward << "\n";
+	*output << estado_rotacion << "\n";
+	*output << conBurbuja << "\n";
 }
 
 
