@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Game.h"
 #include "Scores.h"
+#include "Arrows_Excepciones.h"
 
 using namespace std;
 
@@ -26,13 +27,15 @@ void manageRecords(int puntuaicon) { //se procesa todo el tema de los records
 	delete scores;
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	Game* game = new Game();
 	game->run();
-	int puntuaicon = game->returnPuntuacion();
+	int puntuacion = game->returnPuntuacion();
 	delete game;
-	manageRecords(puntuaicon);
+	try { manageRecords(puntuacion); }
+	catch (FileFormatError e) { cout << e.what(); }
+	catch (FileNotFoundError e) { cout << e.what(); }
 	return 0;
 }

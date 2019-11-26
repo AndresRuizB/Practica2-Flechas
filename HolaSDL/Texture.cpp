@@ -4,7 +4,7 @@
 
 #include "Texture.h"
 #include <iostream>
-
+#include "Arrows_Excepciones.h"
 
 using namespace std;
 
@@ -16,10 +16,10 @@ void Texture::libre() {
 
 void Texture::load(string filename, uint nRows, uint nCols) {
 	SDL_Surface* tempSurface = IMG_Load(filename.c_str());
-	if (tempSurface == nullptr) throw "Error loading surface from " + filename;
+	if (tempSurface == nullptr) throw FileNotFoundError("Error al cargar la superficie ", filename) ;
 	libre();
 	texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-	if (texture == nullptr) throw "Error loading texture from " + filename;
+	if (texture == nullptr) throw FileNotFoundError("Error al cargar la textura ", filename);
 	numRows = nRows;
 	numCols = nCols;
 	w = tempSurface->w;

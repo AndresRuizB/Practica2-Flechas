@@ -11,7 +11,7 @@ using namespace std;
 
 class ArrowsError : public logic_error {
 public:
-	ArrowsError(string& msg) :
+	ArrowsError(const string& msg) :
 		logic_error(msg) {}
 };
 
@@ -19,7 +19,7 @@ class SDLError : public ArrowsError {
 protected:
 	string SDL_Error, IMG_Error;
 public:
-	SDLError(string& msg) :
+	SDLError(const string& msg) :
 		ArrowsError(msg + "Error de SDL: " + SDL_GetError() + " Error de IMG: " + IMG_GetError()),
 		SDL_Error(SDL_GetError()), IMG_Error(IMG_GetError()) {}
 };
@@ -29,11 +29,11 @@ protected:
 	string name;
 public : 
 	FileNotFoundError(const string& msg, string n) :
-		ArrowsError(msg + "Error when opening file " + n) {}
+		ArrowsError(msg + "Error al abrir el archivo " + n) {}
 };
 
 class FileFormatError : public ArrowsError {
 public:
-	FileFormatError(string& m) :
+	FileFormatError(const string& m) :
 		ArrowsError(m) {}
 };

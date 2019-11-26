@@ -3,7 +3,7 @@
 #include "checkML.h"
 #include <fstream>
 #include <string>
-
+#include "Arrows_Excepciones.h"
 
 Scores::Scores()
 {
@@ -17,6 +17,8 @@ void Scores::load(const string& filename) {
 	ifstream input;
 	input.open(filename);
 	
+	if (input.fail()) throw FileNotFoundError("Error al cargar los records ", filename) ;
+
 	string line;
 
 	int pos = 0;
@@ -24,8 +26,14 @@ void Scores::load(const string& filename) {
 
 	while (i < 10 && getline(input, line)) { //carga todos los records  SI DE PUNTUACION TIENE -1 ES QUE ESE ESPACIO AUN ESTÁ LIBRE
 		pos = line.find(" ");
+
+		if (pos ==string::npos) throw FileFormatError("El formato es incorrecto, no hay espacios");
+
 		int puntua = stoi(line.substr(0, pos));
 		string nam = line.erase(0, pos + 1);
+
+		if (nam == "" && puntua != -1) throw FileFormatError("El nombre del archivo esta vacio");
+
 		highScores.push_back(ScoreReg(puntua, nam)); //guarda en el vector la puntuacion
 		i++;
 	}
@@ -59,6 +67,8 @@ bool Scores::addScore(string name,int s) { //s de score
 void Scores::save(const string& filename) {
 	ofstream output;
 	output.open(filename);
+
+	if (output.fail()) throw FileNotFoundError("Error al guardar los records ", filename);
 
 	for (int i = 0; i < highScores.size(); i++) {
 		output << highScores[i].puntuacion << " " << highScores[i].name << "\n"; //guarda todos los valores en archivo

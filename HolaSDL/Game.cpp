@@ -7,16 +7,21 @@
 #include "ScoreBoard.h"
 #include <iterator>
 #include <list>
+#include "Arrows_Excepciones.h"
 
 using namespace std;
 
 Game::Game() {
 	// We ﬁrst initialize SDL
+	try {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Ejercicio 3 SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (window == nullptr || renderer == nullptr)  throw "Error loading the SDL window or renderer";
+	if (window == nullptr || renderer == nullptr)  throw SDLError("No se creo la ventana o el renderer correctamente");
+	}
+	catch (SDLError& e) { cout << e.what() << endl; }
+	catch (exception& e) { cout << e.what() << endl; }
 
 	//creacion de las texturas
 	for (int i = 0; i < texturesInfo.size(); i++) {
