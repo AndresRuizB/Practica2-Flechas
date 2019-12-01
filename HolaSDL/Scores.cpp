@@ -55,12 +55,15 @@ bool Scores::addScore(string name,int s) { //s de score
 	while (i < highScores.size() && !candidato) {
 		if (highScores[i].puntuacion < s) {
 			candidato = true;
+			for (int j = (highScores.size() - 1); j > i; j--) {
+				highScores[j].name = highScores[j-1].name;
+				highScores[j].puntuacion = highScores[j-1].puntuacion;
+			}
 			highScores[i].name = name;
-			highScores[i].puntuacion = s; //actualiza el vector
+			highScores[i].puntuacion = s; //actualiza el vector			
 		}
 		i++;
 	}
-
 	return candidato;
 }
 
