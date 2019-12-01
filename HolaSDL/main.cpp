@@ -13,16 +13,20 @@ using uint = unsigned int;
 void manageRecords(int puntuaicon) { //se procesa todo el tema de los records
 	Scores* scores = new Scores();
 
-	scores->load("top.txt"); //carga todos los records anteriores de archivo
-	string name;
-	cout << "\n\nCual es tu nombre: \n";
-	cin >> name;
-	if (scores->addScore(name, puntuaicon)) { //si has entrado en el top actualiza el archivo
-		scores->save("top.txt");
-	}
-	else cout << "Lo siento " << name << " no has entrado en el top 10\n"; //si no has entrado en el top
+	try {
+		scores->load("top.txt");  //carga todos los records anteriores de archivo		
+		string name;
+		cout << "\n\nCual es tu nombre: \n";
+		cin >> name;
+		if (scores->addScore(name, puntuaicon)) { //si has entrado en el top actualiza el archivo
+			scores->save("top.txt");
+		}
+		else cout << "Lo siento " << name << " no has entrado en el top 10\n"; //si no has entrado en el top
 
-	scores->print(); //muestra los leaderboards por consola
+		scores->print(); //muestra los leaderboards por consola
+	}
+	catch (FileNotFoundError e) { cout <<"Error al intentar acceder al archivo de records. "<< e.what();}
+	catch (FileFormatError e) { cout << "Error al intentar leer el archivo de records. " << e.what(); };
 
 	delete scores;
 }
@@ -41,7 +45,7 @@ int main(int argc, char* argv[]) {
 		cout << "Dime el codigo de tu archivo: ";
 		cin >> archivo;
 		try { game->cargarPartida(archivo + ".txt"); }
-		catch (FileNotFoundError e) { cout << e.what(); }
+		catch (FileNotFoundError e) { cout <<"Error al intentar acceder al arvhivo de guatdado. "<< e.what(); }
 		//cargar parida
 	}
 	

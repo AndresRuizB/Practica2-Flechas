@@ -138,6 +138,7 @@ void Game::disparar(Arrow* r) {
 	}
 }
 
+//funcion sobrecargada para los globos unicamente (para poder contar cuantos lleva cada flecha)
 bool Game::colision(SDL_Rect* globoC, int& numHits) {
 	bool colision = false;
 	list<Arrow*>::iterator it = flechasObjetos.begin();
@@ -149,6 +150,7 @@ bool Game::colision(SDL_Rect* globoC, int& numHits) {
 	return colision; //devulve si ha habido colision
 }
 
+//funcion para el resto de objetos
 bool Game::colision(SDL_Rect* globoC) {
 	bool colision = false;
 	list<Arrow*>::iterator it = flechasObjetos.begin();
@@ -177,15 +179,29 @@ void Game::generaGlobo() {
 
 void Game::generaMariposas(int num) {
 	for (int i = 0; i < num; i++) {
-		crearButterfly();
+		crearButterflyReward();
 	}
 }
 
-void Game::crearButterfly() {
+//crea una mariposa al hacer click en el reward correspondiente
+void Game::crearButterflyReward() {
 	Butterfly* bfly = new Butterfly(textures[butterflys], this);
 	objetos.push_back(bfly);
 	list<GameObject*>::iterator it = objetos.end();
 	bfly->setItList(--it);
+}
+
+//crea unos cuantos globos al hacer click en el reward correspondiente
+void Game::creaGlobosReward()
+{
+	int prob = rand() % (CANTIDAD_MAX_GLOBOS_REWARD - CANTIDAD_MIN_GLOBOS_REWARD) + CANTIDAD_MIN_GLOBOS_REWARD;
+	for (; prob > 0; prob--) {
+		Balloon* ball = new Balloon(textures[balloons], this);
+		objetos.push_back(ball);
+		list<GameObject*>::iterator it = objetos.end();
+		ball->setItList(--it);
+	}
+
 }
 
 
@@ -260,8 +276,8 @@ void Game::killObjectFlecha(list<Arrow*>::iterator it)
 }
 
 void Game::createReward(int x, int y) {
-	int probabilidad = rand() % PROBABILIDAD_REWARD; //genera una probabilidad
-	if (probabilidad == 1) {
+	int probabilidad = rand() % 100; //genera una probabilidad
+	if (probabilidad <= PROBABILIDAD_REWARD) {
 		Reward* rew = new Reward(textures[reward], this, textures[burbuja], x, y); //crea el reward
 		objetos.push_back(rew);
 		list<GameObject*>::iterator it = objetos.end();

@@ -42,7 +42,7 @@ const uint NIVEL_INICIAL = 0;
 		const uint LIMITE_DERECHO_GLOBOS = 750;
 		const uint VELOCIDAD_ANIMACION_PINCHADO = 5;
 		const uint PUNTUACION_POR_GLOBO = 10;
-		const double PROBABILIDAD_GLOBO = 35;
+		const double PROBABILIDAD_GLOBO = 30;
 
 	//mariposas
 		const uint PUNTOS_POR_MARIPOSA = -5;
@@ -58,11 +58,13 @@ const uint NIVEL_INICIAL = 0;
 	//Rewards
 		const uint VELOCIDAD_CAIDA_REWARD = 1;
 		const uint VELOCIDAD_ROTACION_REWARD = 7;
-		const uint PROBABILIDAD_REWARD = 2;  //formula = 1/(x+1)
+		const uint PROBABILIDAD_REWARD = 30;  //en porcentaje
 		const uint SUMA_FLECHAS = 3;
 		const uint OFFSET_SPAWN_REWARD_X = -17;
 		const uint OFFSET_SPAWN_REWARD_Y = -12;
-		const uint NUMERO_DE_REWARDS = 3;
+		const uint NUMERO_DE_REWARDS = 4;
+		const uint CANTIDAD_MAX_GLOBOS_REWARD = 12;
+		const uint CANTIDAD_MIN_GLOBOS_REWARD = 6;	// No puede ser mayor ni igual que el maximo
 
 //UI
 const uint SEPARACION_FLECHAS_UI = 15;
@@ -179,5 +181,6 @@ public:
 	void pasoNivelReward();
 	void guardarPartida();
 	void cargarPartida(string file);
-	void crearButterfly();
+	void crearButterflyReward();
+	void creaGlobosReward();
 };
