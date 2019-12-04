@@ -34,6 +34,8 @@ void manageRecords(int puntuaicon) { //se procesa todo el tema de los records
 int main(int argc, char* argv[]) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
+
+	/*
 	Game* game = new Game();
 	
 	int resp;
@@ -56,6 +58,8 @@ int main(int argc, char* argv[]) {
 		catch (FileFormatError e) { cout << e.what(); }
 		catch (FileNotFoundError e) { cout << e.what(); }
 	}//devuelve true si se ha guardado la partida
+	*/
+
 
 	return 0;
 }
