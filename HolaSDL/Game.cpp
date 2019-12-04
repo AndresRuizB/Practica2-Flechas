@@ -13,9 +13,7 @@
 using namespace std;
 
 Game::Game() {
-
-
-	/*// We ﬁrst initialize SDL
+	// We ﬁrst initialize SDL
 	try {
 		SDL_Init(SDL_INIT_EVERYTHING);
 		window = SDL_CreateWindow("Ejercicio 3 SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -44,7 +42,7 @@ Game::Game() {
 
 	scoreBoard = new ScoreBoard(textures[digits], textures[arrowUI]); //creacion de la ui
 
-	pasoNivelPorReward = false;*/
+	pasoNivelPorReward = false;
 }
 
 Game::~Game() { //destructora
