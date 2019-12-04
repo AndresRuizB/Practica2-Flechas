@@ -91,9 +91,11 @@
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Reward.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="Scores.h" />
+    <ClInclude Include="SDLGameObject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>

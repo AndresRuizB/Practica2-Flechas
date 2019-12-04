@@ -5,22 +5,19 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "Texture.h"
-#include "GameObject.h"
+#include "SDLGameObject.h"
 #include <vector>
 #include <list>
 
 class Game;
 
-class ArrowsGameObject : public GameObject {
+class ArrowsGameObject : public SDLGameObject {
 private:
 
 protected:
-	int ancho, alto;
-	Texture* textura;
 	Game* game;
 	list<GameObject*>::iterator posicionEnEstructura;
 
-	Vector2D posicion;
 	Vector2D direccion;
 
 public:
