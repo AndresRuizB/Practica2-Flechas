@@ -13,10 +13,8 @@ private:
 protected:
 	int ancho, alto;
 	Texture* textura;
-
 	Vector2D posicion;
 
 public:
-
 
 };

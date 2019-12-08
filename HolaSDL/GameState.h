@@ -3,6 +3,7 @@
 #include "EventHandler.h"
 #include <list>
 #include "Game.h"
+#include "EventHandler.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ private:
 
 protected:
 	list<GameObject*> escenario;
+	list<EventHandler*> manejadoresEventos;
 	Game* g;
 
 public:

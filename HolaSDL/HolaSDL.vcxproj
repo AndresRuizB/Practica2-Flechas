@@ -92,6 +92,9 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="PauseState.h" />
+    <ClInclude Include="PlayState.h" />
     <ClInclude Include="Reward.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="Scores.h" />
