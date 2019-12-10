@@ -5,35 +5,15 @@
 #include "Game.h"
 #include "Scores.h"
 #include "Arrows_Excepciones.h"
+#include "GameStateMachine.h"
 
 using namespace std;
 
 using uint = unsigned int;
 
-void manageRecords(int puntuaicon) { //se procesa todo el tema de los records
-	Scores* scores = new Scores();
-
-	try {
-		scores->load("top.txt");  //carga todos los records anteriores de archivo		
-		string name;
-		cout << "\n\nCual es tu nombre: \n";
-		cin >> name;
-		if (scores->addScore(name, puntuaicon)) { //si has entrado en el top actualiza el archivo
-			scores->save("top.txt");
-		}
-		else cout << "Lo siento " << name << " no has entrado en el top 10\n"; //si no has entrado en el top
-
-		scores->print(); //muestra los leaderboards por consola
-	}
-	catch (FileNotFoundError e) { cout <<"Error al intentar acceder al archivo de records. "<< e.what();}
-	catch (FileFormatError e) { cout << "Error al intentar leer el archivo de records. " << e.what(); };
-
-	delete scores;
-}
 
 int main(int argc, char* argv[]) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
 
 	/*
 	Game* game = new Game();
@@ -59,6 +39,16 @@ int main(int argc, char* argv[]) {
 		catch (FileNotFoundError e) { cout << e.what(); }
 	}//devuelve true si se ha guardado la partida
 	*/
+
+	Texture* textures[NUM_TEXTURES];
+
+	for (int i = 0; i < texturesInfo.size(); i++) {
+		textures[i] = new Texture(renderer, texturesInfo[i].direccion, texturesInfo[i].columnas, texturesInfo[i].filas);
+	}
+
+	GameStateMachine* maquinaEstados = new GameStateMachine();
+
+
 
 
 	return 0;

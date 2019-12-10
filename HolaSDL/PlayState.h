@@ -9,5 +9,9 @@ private:
 
 
 public:
+	void update();
+	void render();
+	void handleEvent();
+
 
 };
