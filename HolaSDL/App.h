@@ -104,27 +104,26 @@ struct InfoLevels
 	int flechasAlLlegar;
 };
 
+const vector<InfoTexture> texturesInfo = {
+InfoTexture{"..\\images\\Arrow1.png", 1, 1},
+InfoTexture{"..\\images\\Arrow2.png", 1, 1},
+InfoTexture{"..\\images\\balloons.png", 7, 6},
+InfoTexture{"..\\images\\Bow1.png", 1, 1},
+InfoTexture{"..\\images\\Bow2.png", 1, 1},
+InfoTexture{"..\\images\\digits1.png", 1, 10},
+InfoTexture{"..\\images\\butterfly2.png", 4, 10},
+InfoTexture{"..\\images\\bg_spring_trees_1.png", 1, 1},
+InfoTexture{"..\\images\\bg1.png", 1, 1},
+InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
+InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
+InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
+InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
+InfoTexture{"..\\images\\rewards.png",10,8},
+InfoTexture{"..\\images\\bubble.png",1,1}
+};
 
 class App {
 private:
-	const vector<InfoTexture> texturesInfo = {
-	InfoTexture{"..\\images\\Arrow1.png", 1, 1},
-	InfoTexture{"..\\images\\Arrow2.png", 1, 1},
-	InfoTexture{"..\\images\\balloons.png", 7, 6},
-	InfoTexture{"..\\images\\Bow1.png", 1, 1},
-	InfoTexture{"..\\images\\Bow2.png", 1, 1},
-	InfoTexture{"..\\images\\digits1.png", 1, 10},
-	InfoTexture{"..\\images\\butterfly2.png", 4, 10},
-	InfoTexture{"..\\images\\bg_spring_trees_1.png", 1, 1},
-	InfoTexture{"..\\images\\bg1.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_01.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_03.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
-	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
-	InfoTexture{"..\\images\\rewards.png",10,8},
-	InfoTexture{"..\\images\\bubble.png",1,1}
-	};
-
 	vector<InfoLevels> levelsInfo = {
 		InfoLevels{0, 300, 4, 0},
 		InfoLevels{1, 100, 6, 1},
@@ -139,9 +138,12 @@ private:
 	Texture* textures[NUM_TEXTURES];
 	GameStateMachine* maquinaEstados;
 
+	bool exit = false;
+
 public:
 	App();
 	~App();
 
+	void run();
 
 };

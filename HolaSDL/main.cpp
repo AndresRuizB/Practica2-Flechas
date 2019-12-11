@@ -2,11 +2,8 @@
 #include "SDL_image.h"
 #include "checkML.h"
 #include <iostream>
-#include "Game.h"
-#include "Scores.h"
-#include "Arrows_Excepciones.h"
 #include "GameStateMachine.h"
-
+#include "App.h"
 using namespace std;
 
 using uint = unsigned int;
@@ -40,15 +37,9 @@ int main(int argc, char* argv[]) {
 	}//devuelve true si se ha guardado la partida
 	*/
 
-	Texture* textures[NUM_TEXTURES];
+	App* aplicacion = new App();
 
-	for (int i = 0; i < texturesInfo.size(); i++) {
-		textures[i] = new Texture(renderer, texturesInfo[i].direccion, texturesInfo[i].columnas, texturesInfo[i].filas);
-	}
-
-	GameStateMachine* maquinaEstados = new GameStateMachine();
-
-
+	aplicacion->run();
 
 
 	return 0;

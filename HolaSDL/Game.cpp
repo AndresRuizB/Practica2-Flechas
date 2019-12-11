@@ -9,6 +9,7 @@
 #include <list>
 #include "Arrows_Excepciones.h"
 #include <fstream>
+#include "App.h"
 
 using namespace std;
 

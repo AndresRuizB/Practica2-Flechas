@@ -1,4 +1,5 @@
 #include "GameStateMachine.h"
+#include "GameState.h"
 
 GameStateMachine::GameStateMachine()
 {
@@ -37,4 +38,9 @@ void GameStateMachine::update()
 void GameStateMachine::render()
 {
 	currentState()->render();
+}
+
+void GameStateMachine::handleEvent()
+{
+	currentState()->handleEvent();
 }

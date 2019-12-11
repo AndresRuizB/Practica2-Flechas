@@ -2,8 +2,9 @@
 #include "GameObject.h"
 #include "EventHandler.h"
 #include <list>
-#include "Game.h"
 #include "EventHandler.h"
+
+class App;
 
 using namespace std;
 
@@ -13,7 +14,7 @@ private:
 protected:
 	list<GameObject*> escenario;
 	list<EventHandler*> manejadoresEventos;
-	Game* g;
+	App* app;
 
 public:
 	GameState();

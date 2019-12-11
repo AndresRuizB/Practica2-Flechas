@@ -14,6 +14,7 @@
 #include "EventHandler.h"
 #include "Butterfly.h"
 #include "Reward.h"
+#include "App.h"
 //
 //using uint = unsigned int;
 //using namespace std;

@@ -15,10 +15,13 @@ public:
 	~GameStateMachine();
 
 	GameState* currentState();
+
+
 	void pushState(GameState* gState);
 	void changeState(GameState* gState);
 	void popState();
 
 	void update();
 	void render();
+	void handleEvent();
 };
