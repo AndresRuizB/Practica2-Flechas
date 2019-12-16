@@ -2,7 +2,9 @@
 #include "GameObject.h"
 #include "EventHandler.h"
 #include <list>
-#include "EventHandler.h"
+#include "SDL.h"
+#include "SDL_image.h"
+#include "texture.h"
 
 class App;
 
@@ -14,8 +16,8 @@ private:
 protected:
 	list<GameObject*> escenario;
 	list<EventHandler*> manejadoresEventos;
+	SDL_Renderer* renderer;
 	App* app;
-
 public:
 	GameState();
 	~GameState();

@@ -1,13 +1,16 @@
 #pragma once
 #include "GameStateMachine.h"
+#include "SDLGameObject.h"
+#include "Fondo.h"
 
 using namespace std;
 
 class MainMenuState : public GameState {
 private:
-
+	App* app;
 public:
-	MainMenuState();
+	Fondo* fondo;
+	MainMenuState(App* a);
 	~MainMenuState();
 
 	void render();

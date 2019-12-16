@@ -10,7 +10,6 @@ ArrowsGameObject::ArrowsGameObject() {
 	ancho = 0;
 	direccion = Vector2D();
 	textura = nullptr;
-	game = nullptr;
 }
 ArrowsGameObject::~ArrowsGameObject()
 {
