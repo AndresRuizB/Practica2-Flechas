@@ -18,7 +18,7 @@ App::App()
 		textures[i] = new Texture(renderer, texturesInfo[i].direccion, texturesInfo[i].columnas, texturesInfo[i].filas);
 	}
 
-	maquinaEstados = new GameStateMachine();
+	maquinaEstados = new GameStateMachine(renderer);
 	maquinaEstados->pushState(new MainMenuState(this));
 }
 
@@ -30,11 +30,18 @@ App::~App()
 
 void App::run()
 {
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, textures[3]->getTexture(), nullptr, nullptr);
+
+	SDL_RenderPresent(renderer);
+	while (true) {};
+
+	/*
 	while (true) { 
 		maquinaEstados->handleEvent();
 		maquinaEstados->update();
 		maquinaEstados->render();
-	}
+	}*/
 }
 
 Texture* App::returnTexture(OBJETOS obj)

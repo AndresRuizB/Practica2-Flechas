@@ -1,8 +1,9 @@
 #include "GameStateMachine.h"
 #include "GameState.h"
 
-GameStateMachine::GameStateMachine()
+GameStateMachine::GameStateMachine(SDL_Renderer* r)
 {
+	renderer = r;
 }
 
 GameStateMachine::~GameStateMachine()
@@ -37,6 +38,7 @@ void GameStateMachine::update()
 
 void GameStateMachine::render()
 {
+	SDL_RenderClear(renderer);
 	currentState()->render();
 }
 

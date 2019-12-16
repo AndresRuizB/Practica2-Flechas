@@ -71,7 +71,6 @@
     <ClCompile Include="ArrowsGameObject.cpp" />
     <ClCompile Include="EndState.cpp" />
     <ClCompile Include="EventHandler.cpp" />
-    <ClCompile Include="Fondo.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
@@ -86,7 +85,6 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="ArrowsGameObject.h" />
     <ClInclude Include="EventHandler.h" />
-    <ClInclude Include="Fondo.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />

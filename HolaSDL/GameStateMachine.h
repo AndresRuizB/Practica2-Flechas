@@ -8,10 +8,11 @@ class GameStateMachine {
 private:
 
 	stack<GameState*> pilaEstados;
+	SDL_Renderer* renderer;
 
 public:
 
-	GameStateMachine();
+	GameStateMachine(SDL_Renderer* renderer);
 	~GameStateMachine();
 
 	GameState* currentState();

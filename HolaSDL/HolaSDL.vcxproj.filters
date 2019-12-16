@@ -54,9 +54,6 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Fondo.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -93,9 +90,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="App.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Fondo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
