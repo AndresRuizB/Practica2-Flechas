@@ -50,7 +50,6 @@ private:
 public:
 	Game(App* a);
 	~Game();
-	bool run();
 	void render() const;
 	void handleEvents();
 	void update();

@@ -43,7 +43,7 @@ Game::Game(App* a) {
 }
 
 Game::~Game() { //destructora
-
+	cout << "DESTRucion game";
 	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); it++) {	//el arco se elimina a parte (DONDE¿?)
 		delete* it;
 	}
@@ -52,14 +52,6 @@ Game::~Game() { //destructora
 	delete scoreBoard;
 }
 
-bool Game::run() {
-
-	/*int startTime, frameTime;
-	if (!haSigoCargado)generaMariposas(levelsInfo[nivelActual].nMariposas);
-	if (guardar) guardarPartida();
-	return guardar;*/
-	return true;
-}
 
 void Game::update() { //avisa a los objetos para que se actualicen
 	//cout << "Obj: " << objetos.size() <<endl;	

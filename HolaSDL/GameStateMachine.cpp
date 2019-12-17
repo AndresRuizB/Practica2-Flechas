@@ -23,6 +23,7 @@ void GameStateMachine::pushState(GameState* gState)
 void GameStateMachine::changeState(GameState* gState)
 {
 	if (!pilaEstados.empty()) {
+		delete pilaEstados.top();
 		pilaEstados.pop();
 	}
 	pilaEstados.push(gState);
@@ -30,9 +31,8 @@ void GameStateMachine::changeState(GameState* gState)
 
 void GameStateMachine::popState()
 {
-	if (pilaEstados.size()>1) {
-		pilaEstados.pop();
-	}
+	delete pilaEstados.top();
+	pilaEstados.pop();
 }
 
 void GameStateMachine::update()

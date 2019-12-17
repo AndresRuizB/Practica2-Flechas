@@ -11,6 +11,7 @@ PlayState::PlayState(App* a)
 
 PlayState::~PlayState()
 {
+	delete game;
 }
 
 void PlayState::update()

@@ -26,6 +26,7 @@ App::App()
 
 App::~App()
 {
+	cout << "Destructora app";
 	delete maquinaEstados;
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
 	salir();
@@ -34,15 +35,27 @@ App::~App()
 void App::run()
 {
 	int startTime, frameTime;
-	while (true) { //ves este true, esta noche explotara por esto y no sabremos xq, guarda el tweet
+	while (!exit) { //ves este true, esta noche explotara por esto y no sabremos xq, guarda el tweet
 		startTime = SDL_GetTicks();
 		maquinaEstados->handleEvent();
 		maquinaEstados->update();
 		maquinaEstados->render();
 
+		if (menuPlay) {
+			maquinaEstados->changeState(new PlayState(this));
+			menuPlay = false;
+		}
+		else if (vMenu) {
+			popStateApp();
+			maquinaEstados->pushState(new MainMenuState(this));
+			vMenu = false;
+		}
+
 		frameTime = SDL_GetTicks() - startTime; //tiempo transquirrido durante el frame
 		if (frameTime < (1000 / FRAME_RATE)) SDL_Delay((1000 / FRAME_RATE) - frameTime); //se actualiza según la constante FRAME_RATE 
 	}
+
+	popStateApp();
 }
 
 Texture* App::returnTexture(OBJETOS obj)
@@ -62,17 +75,17 @@ void App::popStateApp()
 
 void App::menuToPlay()
 {
-	maquinaEstados->changeState(new PlayState(this));
+	menuPlay = true;
 }
 
 void App::volverMenu()
 {
-	popStateApp();
-	maquinaEstados->pushState(new MainMenuState(this));
+	vMenu = true;
 }
 
 void App::salir()
 {
+	exit = true;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

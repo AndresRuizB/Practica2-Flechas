@@ -20,9 +20,10 @@ protected:
 	list<EventHandler*> manejadoresEventos;
 	SDL_Renderer* renderer;
 	App* app;
+	bool menu = false;
 public:
 	GameState();
-	~GameState();
+	virtual ~GameState();
 
 	virtual void render() = 0;
 	virtual void update() = 0;

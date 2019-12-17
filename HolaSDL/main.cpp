@@ -41,6 +41,6 @@ int main(int argc, char* argv[]) {
 
 	aplicacion->run();
 
-
+	delete aplicacion;
 	return 0;
 }

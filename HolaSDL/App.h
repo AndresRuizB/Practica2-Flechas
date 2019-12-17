@@ -139,6 +139,9 @@ private:
 	GameStateMachine* maquinaEstados;
 
 	bool exit = false;
+	bool menuPlay = false;
+	bool vMenu = false;
+
 
 public:
 	Texture* textures[NUM_TEXTURES]; //PROVISIONAL (o definitivo segun)

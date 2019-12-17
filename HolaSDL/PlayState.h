@@ -12,7 +12,7 @@ private:
 
 public:
 	PlayState(App* a);
-	~PlayState();
+	virtual ~PlayState();
 
 	virtual void update();
 	virtual void render();

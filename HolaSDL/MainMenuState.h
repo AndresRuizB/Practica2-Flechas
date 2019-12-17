@@ -8,10 +8,10 @@ class App;
 
 class MainMenuState : public GameState {
 private:
-	
+	GameObject* aux;
 public:
 	MainMenuState(App* a);
-	~MainMenuState();
+	virtual ~MainMenuState();
 
 	virtual void render();
 	virtual void update();
