@@ -3,11 +3,9 @@
 #include "App.h"
 #include "GameState.h"
 
-MenuButton::MenuButton(App* a, GameState* g, int x, int y, Boton b)
+MenuButton::MenuButton(App* a, GameState* g, Texture* t, int x, int y,  void (*cb)())
 {
-	if (b == play)textura = a->returnTexture(playbutton);
-	else if (b == exitt) textura = a->returnTexture(exitbutton);
-	else if (b == load) textura = a->returnTexture(loadbutton);
+	textura = t;
 
 	ancho = textura->getW();
 	alto = textura->getH();
@@ -19,7 +17,7 @@ MenuButton::MenuButton(App* a, GameState* g, int x, int y, Boton b)
 	framedestino.x = x;
 	framedestino.y = y;
 
-	tipoBoton = b;
+	mCallback = cb;
 }
 
 MenuButton::~MenuButton()
@@ -46,10 +44,9 @@ void MenuButton::handleEvent(SDL_Event& event)
 		punto.y = y;
 
 		if (SDL_PointInRect(&punto, &framedestino)) {
-			//cambio de escena
-			if (tipoBoton == play)gState->playState();
-			else if (tipoBoton == exitt) gState->exitState();
-			else if (tipoBoton == load); //CARGAR
+			
+			mCallback();
+
 		}
 	}
 }

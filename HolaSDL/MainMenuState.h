@@ -17,4 +17,8 @@ public:
 	virtual void handleEvent();
 	virtual void playState();
 	virtual void exitState();
+
+	static void menuToPlay();
+	static void exitFromMenu();
+	static void loadFromMenu();
 };

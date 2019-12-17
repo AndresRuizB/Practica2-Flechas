@@ -10,12 +10,12 @@ class GameState;
 class MenuButton:public  SDLGameObject, public EventHandler
 {
 private:
-	Boton tipoBoton;
+	void (*mCallback) ();
 	SDL_Rect framedestino;
 	GameState* gState;
 
 public:
-	MenuButton(App* a, GameState* g, int x, int y, Boton b);
+	MenuButton(App* a, GameState* g, Texture* t, int x, int y, void (*cb)());
 	~MenuButton();
 
 	virtual void render();

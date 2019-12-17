@@ -8,15 +8,15 @@
 MainMenuState::MainMenuState(App* a)
 {
 	app = a;
-	MenuButton* pla = new MenuButton(a,this,100,230, play);
+	MenuButton* pla = new MenuButton(a, this, a->returnTexture(playbutton), 100, 230, menuToPlay);
 	escenario.push_back(pla);
-	manejadoresEventos.push_back(pla);	
+	manejadoresEventos.push_back(pla);
 
-	MenuButton* exi = new MenuButton(a, this,500,230, exitt);
+	MenuButton* exi = new MenuButton(a, this, a->returnTexture(exitbutton), 500, 230, exitFromMenu);
 	escenario.push_back(exi);
 	manejadoresEventos.push_back(exi);
 
-	MenuButton* loa = new MenuButton(a, this, 300, 230, load);
+	MenuButton* loa = new MenuButton(a, this, a->returnTexture(loadbutton), 300, 230, loadFromMenu);
 	escenario.push_back(loa);
 	manejadoresEventos.push_back(loa);
 }
@@ -64,5 +64,20 @@ void MainMenuState::playState()
 void MainMenuState::exitState()
 {
 	//funcionar funciona pero como se imprimen muchas cosas por pantalla no se ve nah
-	cout << "CERRRAAARRRR SDLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
+	cout << "CERRRAAARRRR SDLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL\n";
+}
+
+void MainMenuState::menuToPlay()
+{
+	cout << "Play button clicked\n";
+}
+
+void MainMenuState::exitFromMenu()
+{
+	cout << "Exit button clicked\n";
+}
+
+void MainMenuState::loadFromMenu()
+{
+	cout << "load button clicked\n";
 }
