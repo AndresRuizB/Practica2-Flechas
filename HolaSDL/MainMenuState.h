@@ -9,6 +9,8 @@ class App;
 class MainMenuState : public GameState {
 private:
 	GameObject* aux;
+	Texture* fondo;
+	SDL_Rect obj;
 public:
 	MainMenuState(App* a);
 	virtual ~MainMenuState();

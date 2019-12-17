@@ -2,6 +2,7 @@
 #include "GameStateMachine.h"
 #include "MainMenuState.h"
 #include "PlayState.h"
+#include "PauseState.h"
 
 
 App::App()
@@ -50,6 +51,10 @@ void App::run()
 			maquinaEstados->pushState(new MainMenuState(this));
 			vMenu = false;
 		}
+		else if (contGame) {
+			popStateApp();
+			contGame = false;
+		}
 
 		frameTime = SDL_GetTicks() - startTime; //tiempo transquirrido durante el frame
 		if (frameTime < (1000 / FRAME_RATE)) SDL_Delay((1000 / FRAME_RATE) - frameTime); //se actualiza según la constante FRAME_RATE 
@@ -89,4 +94,14 @@ void App::salir()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+void App::pausa()
+{
+	maquinaEstados->pushState(new PauseState(this));
+}
+
+void App::continueGame()
+{
+	contGame = true;
 }

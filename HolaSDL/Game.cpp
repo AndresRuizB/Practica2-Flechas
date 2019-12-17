@@ -36,14 +36,13 @@ Game::Game(App* a) {
 	generaMariposas(levelsInfo[nivelActual].nMariposas);
 
 	pasoNivelPorReward = false;
-	fondo = a->returnTexture((OBJETOS)(nivelActual+7));
+	fondo = a->returnTexture((OBJETOS)(nivelActual + 7));
 	framDestinoFondo.x = framDestinoFondo.y = 0;
 	framDestinoFondo.h = fondo->getH();
 	framDestinoFondo.w = fondo->getW();
 }
 
 Game::~Game() { //destructora
-	cout << "DESTRucion game";
 	for (list<GameObject*>::iterator it = objetos.begin(); it != objetos.end(); it++) {	//el arco se elimina a parte (DONDE¿?)
 		delete* it;
 	}
@@ -81,15 +80,21 @@ void Game::handleEvents() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
-		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s) {
-			exit = true;
-			guardar = true;
+		else if (event.type == SDL_KEYDOWN && (event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_ESCAPE)) {
+			if (event.key.keysym.sym == SDLK_s) {
+				exit = true;
+				guardar = true;
+			}
+			else if (event.key.keysym.sym == SDLK_ESCAPE) {
+				app->pausa();
+			}
 		}
 		else {
 			for (list<EventHandler*>::iterator it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
 				(*it)->handleEvent(event);
 			}
 		}
+
 	}
 }
 
@@ -142,7 +147,7 @@ void Game::condicionFinDeJuego() {
 
 void Game::generaGlobo() {
 	int probGlobo = rand() % 1000 + 1;
-	if (probGlobo <= PROBABILIDAD_GLOBO) {		
+	if (probGlobo <= PROBABILIDAD_GLOBO) {
 		Balloon* glo = new Balloon(app->returnTexture(balloons), this); //crea el globo		
 		objetos.push_back(glo); //añade el globo al vector
 		list<GameObject*>::iterator it = objetos.end();

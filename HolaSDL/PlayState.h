@@ -17,8 +17,4 @@ public:
 	virtual void update();
 	virtual void render();
 	virtual void handleEvent();
-	virtual void playState() {};
-	virtual void exitState() {};
-
-
 };

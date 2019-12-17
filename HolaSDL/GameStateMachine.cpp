@@ -8,6 +8,10 @@ GameStateMachine::GameStateMachine(SDL_Renderer* r)
 
 GameStateMachine::~GameStateMachine()
 {
+	while (!pilaEstados.empty()) {
+		delete pilaEstados.top();
+		pilaEstados.pop();
+	}
 }
 
 GameState* GameStateMachine::currentState()

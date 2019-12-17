@@ -24,6 +24,7 @@ private:
 	bool exit = false;
 	bool guardar = false;
 	bool haSigoCargado = false;
+	bool pasoNivelPorReward;
 	list<GameObject*> objetos;
 	list<Arrow*> flechasObjetos;
 	list<list<Arrow*>::iterator> flechasPenDestruccion;
@@ -39,7 +40,6 @@ private:
 	GameObject* arco;
 	ScoreBoard* scoreBoard;
 
-	bool pasoNivelPorReward;
 
 
 	SDL_Rect framDestinoFondo;
