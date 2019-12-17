@@ -29,4 +29,6 @@ public:
 	virtual SDL_Rect getCollisionRect() = 0;
 	virtual void setItList(list<GameObject*>::iterator it) = 0;
 
+	virtual void saveToFile(ofstream* output);
+	virtual void loadFromFile(ifstream* input);
 };

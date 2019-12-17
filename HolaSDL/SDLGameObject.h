@@ -17,4 +17,6 @@ protected:
 
 public:
 
+	virtual void saveToFile(ofstream* output) ;
+	virtual void loadFromFile(ifstream* input) ;
 };
