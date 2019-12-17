@@ -6,6 +6,7 @@
 #include "SDL_image.h"
 #include "texture.h"
 
+class GameStateMachine;
 class App;
 
 using namespace std;

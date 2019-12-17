@@ -2,6 +2,8 @@
 #include <stack>
 #include "GameState.h"
 
+class App;
+
 using namespace std;
 
 class GameStateMachine {

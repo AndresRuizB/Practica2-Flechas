@@ -22,13 +22,17 @@ void GameStateMachine::pushState(GameState* gState)
 
 void GameStateMachine::changeState(GameState* gState)
 {
-	pilaEstados.pop();
+	if (!pilaEstados.empty()) {
+		pilaEstados.pop();
+	}
 	pilaEstados.push(gState);
 }
 
 void GameStateMachine::popState()
 {
-	pilaEstados.pop();
+	if (pilaEstados.size()>1) {
+		pilaEstados.pop();
+	}
 }
 
 void GameStateMachine::update()
@@ -40,6 +44,7 @@ void GameStateMachine::render()
 {
 	SDL_RenderClear(renderer);
 	currentState()->render();
+	SDL_RenderPresent(renderer);
 }
 
 void GameStateMachine::handleEvent()

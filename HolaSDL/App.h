@@ -140,4 +140,6 @@ public:
 
 	void run();
 	Texture* returnTexture(OBJETOS obj);
+	void pushStateApp(GameState* gState);
+	void popStateApp();
 };

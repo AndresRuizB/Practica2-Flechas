@@ -6,7 +6,7 @@ using namespace std;
 
 class MainMenuState : public GameState {
 private:
-	App* app;
+	
 public:
 	MainMenuState(App* a);
 	~MainMenuState();
@@ -14,5 +14,4 @@ public:
 	void render();
 	void update();
 	void handleEvent();
-	virtual string getStateID()const { return "Main MenuState"; };
 };
