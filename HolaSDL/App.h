@@ -71,7 +71,7 @@ const uint TAMANO_HITBOX_Y = 5;
 
 //Texturas
 
-const uint NUM_TEXTURES = 19;
+const uint NUM_TEXTURES = 20;
 const uint ESCALA_ARCO = 3;
 const uint ESCALA_FLECHA = 3;
 const uint ESCALA_GLOBO = 40;
@@ -81,7 +81,7 @@ const uint ESCALA_BURBUJA = 4;
 
 const enum OBJETOS
 {
-	arrowPhysics, arrowUI, balloons, bowCharged, bowUncharged, digits, butterflys, background0, background1, background2, background3, background4, background5, reward, burbuja, playbutton, exitbutton, loadbutton, savebutton,
+	arrowPhysics, arrowUI, balloons, bowCharged, bowUncharged, digits, butterflys, background0, background1, background2, background3, background4, background5, reward, burbuja, playbutton, exitbutton, loadbutton, savebutton, backbutton,
 };
 
 struct InfoTexture
@@ -118,6 +118,7 @@ const vector<InfoTexture> texturesInfo = {
 	InfoTexture{"..\\images\\exit.png",1,1},
 	InfoTexture{"..\\images\\load.png",1,1},
 	InfoTexture{"..\\images\\save.png",1,1},
+	InfoTexture{"..\\images\\back.png",1,1},
 };
 
 const vector<InfoLevels> levelsInfo = {
@@ -162,4 +163,5 @@ public:
 	void salir();
 	void pausa();
 	void continueGame();
+	void endGame();
 };

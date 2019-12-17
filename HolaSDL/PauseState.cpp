@@ -12,7 +12,7 @@ PauseState::PauseState(App* a)
 	escenario.push_back(aux);
 	manejadoresEventos.push_back(static_cast<MenuButton*>(aux));
 
-	aux = new MenuButton(a, this, a->returnTexture(exitbutton), 600, 230, exit);
+	aux = new MenuButton(a, this, a->returnTexture(backbutton), 600, 230, exit);
 	escenario.push_back(aux);
 	manejadoresEventos.push_back(static_cast<MenuButton*>(aux));
 
@@ -48,7 +48,6 @@ void PauseState::handleEvent()
 void PauseState::resume(App* app)
 {
 	app->continueGame();
-	cout << "resume\n";
 }
 
 void PauseState::save(App* app)
@@ -58,6 +57,5 @@ void PauseState::save(App* app)
 
 void PauseState::exit(App* app)
 {
-	cout << "exit\n";
-	app->salir();
+	app->volverMenu();
 }

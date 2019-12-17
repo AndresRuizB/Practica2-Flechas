@@ -3,6 +3,7 @@
 #include "MainMenuState.h"
 #include "PlayState.h"
 #include "PauseState.h"
+#include "EndState.h"
 
 
 App::App()
@@ -104,4 +105,10 @@ void App::pausa()
 void App::continueGame()
 {
 	contGame = true;
+}
+
+void App::endGame()
+{
+	popStateApp();
+	maquinaEstados->pushState(new EndState(this));
 }

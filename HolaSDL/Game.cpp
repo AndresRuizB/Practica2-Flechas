@@ -65,7 +65,7 @@ void Game::update() { //avisa a los objetos para que se actualicen
 	if (puntuacion >= levelsInfo[nivelActual].puntosSigNivel || pasoNivelPorReward) cambiaNivel();
 
 
-	if (exit)app->volverMenu();//cerrar volver al menu
+	if (exit)app->endGame();//pantalla de fin de juego
 }
 
 void Game::render()  const {
