@@ -1,6 +1,7 @@
 #pragma once
 #include "GameStateMachine.h"
 #include "SDLGameObject.h"
+#include "MenuButton.h"
 
 using namespace std;
 
@@ -11,7 +12,9 @@ public:
 	MainMenuState(App* a);
 	~MainMenuState();
 
-	void render();
-	void update();
-	void handleEvent();
+	virtual void render();
+	virtual void update();
+	virtual void handleEvent();
+	virtual void playState();
+	virtual void exitState();
 };

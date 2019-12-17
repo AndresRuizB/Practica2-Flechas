@@ -71,7 +71,7 @@ const uint TAMANO_HITBOX_Y = 5;
 
 //Texturas
 
-const uint NUM_TEXTURES = 15;
+const uint NUM_TEXTURES = 18;
 const uint ESCALA_ARCO = 3;
 const uint ESCALA_FLECHA = 3;
 const uint ESCALA_GLOBO = 40;
@@ -81,7 +81,7 @@ const uint ESCALA_BURBUJA = 4;
 
 const enum OBJETOS
 {
-	arrowPhysics, arrowUI, balloons, bowCharged, bowUncharged, digits, butterflys, background0, background1, background2, background3, background4, background5, reward, burbuja,
+	arrowPhysics, arrowUI, balloons, bowCharged, bowUncharged, digits, butterflys, background0, background1, background2, background3, background4, background5, reward, burbuja, playbutton, exitbutton, loadbutton,
 };
 
 struct InfoTexture
@@ -113,8 +113,14 @@ const vector<InfoTexture> texturesInfo = {
 	InfoTexture{"..\\images\\Cartoon_Forest_BG_02.png", 1, 1},
 	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
 	InfoTexture{"..\\images\\rewards.png",10,8},
-	InfoTexture{"..\\images\\bubble.png",1,1}
+	InfoTexture{"..\\images\\bubble.png",1,1},
+	InfoTexture{"..\\images\\pause.png",1,1},
+	InfoTexture{"..\\images\\exit.png",1,1},
+	InfoTexture{"..\\images\\load.png",1,1},
 };
+
+
+enum Boton { play, save, menu, exitt, load };
 
 class App {
 private:

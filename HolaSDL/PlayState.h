@@ -12,9 +12,11 @@ public:
 	PlayState(App* a);
 	~PlayState();
 
-	void update();
-	void render();
-	void handleEvent();
+	virtual void update();
+	virtual void render();
+	virtual void handleEvent();
+	virtual void playState() {};
+	virtual void exitState() {};
 
 
 };
