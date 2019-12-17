@@ -23,7 +23,5 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void handleEvent(SDL_Event& event);
-	virtual void saveToFile(ofstream* output) {};
-	virtual void loadFromFile(ifstream* input) {};
 
 };

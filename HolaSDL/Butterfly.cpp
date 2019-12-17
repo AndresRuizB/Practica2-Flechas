@@ -79,13 +79,7 @@ SDL_Rect Butterfly::getDestRect() { return SDL_Rect(); }
 SDL_Rect Butterfly::getCollisionRect() { return SDL_Rect(); }
 
 void Butterfly::loadFromFile(ifstream* input) { 
-	double x, y;
-	*input >> x;
-	*input >> y;
-	posicion = Vector2D(x,y);
-	*input >> x;
-	*input >> y;
-	direccion = Vector2D(x,y);
+	SDLGameObject::loadFromFile(input);
 	*input >> frame;
 	*input >> tiempoMuerta;
 	*input >> muerta;
@@ -93,8 +87,7 @@ void Butterfly::loadFromFile(ifstream* input) {
 
 void Butterfly::saveToFile(ofstream* output) {
 	*output << "\nbutterfly\n";
-	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	SDLGameObject::saveToFile(output);
 	*output << frame << "\n";
 	*output << tiempoMuerta << "\n";
 	*output << muerta << "\n";

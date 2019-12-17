@@ -81,13 +81,7 @@ SDL_Rect Balloon::getCollisionRect() { return SDL_Rect(); }
 
 
 void Balloon::loadFromFile(ifstream* input) {
-	int x, y;
-	*input >> x;
-	*input >> y;
-	posicion = Vector2D(x, y);
-	*input >> x;
-	*input >> y;
-	direccion = Vector2D(x, y);
+	SDLGameObject::loadFromFile(input);
 	*input >> pinchado;
 	*input >> momentoPinchado;
 	*input >> globo;
@@ -96,8 +90,7 @@ void Balloon::loadFromFile(ifstream* input) {
 
 void Balloon::saveToFile(ofstream* output) {
 	*output << "\nbaloon\n";
-	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	SDLGameObject::saveToFile(output);
 	*output << pinchado << "\n";
 	*output << momentoPinchado << "\n";
 	*output << globo << "\n";

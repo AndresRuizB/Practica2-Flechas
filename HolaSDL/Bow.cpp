@@ -100,13 +100,7 @@ SDL_Rect Bow::getDestRect() { return SDL_Rect(); }
 SDL_Rect Bow::getCollisionRect() { return SDL_Rect(); }
 
 void Bow::loadFromFile(ifstream* input) {
-	int x, y;
-	*input >> x;
-	*input >> y;
-	posicion = Vector2D(x, y);
-	*input >> x;
-	*input >> y;
-	direccion = Vector2D(x, y);
+	SDLGameObject::loadFromFile(input);
 	*input >> cargado;
 	*input >> angulo;
 	*input >> velFlecha;
@@ -115,8 +109,7 @@ void Bow::loadFromFile(ifstream* input) {
 
 void Bow::saveToFile(ofstream* output) {	
 	*output << "\nbow\n";
-	*output << posicion.GetX() << " " << posicion.GetY() << "\n";
-	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+	SDLGameObject::saveToFile(output);
 	*output << cargado << "\n";
 	*output << angulo << "\n";
 	*output << velFlecha << "\n";
