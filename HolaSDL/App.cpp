@@ -2,6 +2,7 @@
 #include "GameStateMachine.h"
 #include "MainMenuState.h"
 
+
 App::App()
 {
 	try {
@@ -30,10 +31,15 @@ App::~App()
 
 void App::run()
 {
-	while (true) { 
+	int startTime, frameTime;
+	while (true) { //ves este true, esta noche explotara por esto y no sabremos xq, guarda el tweet
+		startTime = SDL_GetTicks();
 		maquinaEstados->handleEvent();
 		maquinaEstados->update();
 		maquinaEstados->render();
+
+		frameTime = SDL_GetTicks() - startTime; //tiempo transquirrido durante el frame
+		if (frameTime < (1000 / FRAME_RATE)) SDL_Delay((1000 / FRAME_RATE) - frameTime); //se actualiza según la constante FRAME_RATE 
 	}
 }
 
@@ -50,4 +56,10 @@ void App::pushStateApp(GameState* gState)
 void App::popStateApp()
 {
 	maquinaEstados->popState();
+}
+
+void App::volverMenu()
+{
+	popStateApp();
+	maquinaEstados->pushState(new MainMenuState(this));
 }

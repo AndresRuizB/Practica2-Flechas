@@ -68,9 +68,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="ArrowsGameObject.cpp" />
+    <ClCompile Include="Balloon.cpp" />
+    <ClCompile Include="Bow.cpp" />
+    <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="EndState.cpp" />
     <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
@@ -79,13 +84,20 @@
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Reward.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="ArrowsGameObject.h" />
+    <ClInclude Include="Balloon.h" />
+    <ClInclude Include="Bow.h" />
+    <ClInclude Include="Butterfly.h" />
     <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
@@ -93,6 +105,8 @@
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="Reward.h" />
+    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="SDLGameObject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />

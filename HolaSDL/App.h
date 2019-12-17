@@ -39,7 +39,7 @@ const uint LIMITE_IZQUIERDO_GLOBOS = 300;
 const uint LIMITE_DERECHO_GLOBOS = 750;
 const uint VELOCIDAD_ANIMACION_PINCHADO = 5;
 const uint PUNTUACION_POR_GLOBO = 10;
-const double PROBABILIDAD_GLOBO = 30;
+const double PROBABILIDAD_GLOBO = 35;
 
 //mariposas
 const uint PUNTOS_POR_MARIPOSA = -5;
@@ -119,28 +119,31 @@ const vector<InfoTexture> texturesInfo = {
 	InfoTexture{"..\\images\\load.png",1,1},
 };
 
-
-enum Boton { play, save, menu, exitt, load };
-
-class App {
-private:
-	vector<InfoLevels> levelsInfo = {
-		InfoLevels{0, 300, 4, 0},
-		InfoLevels{1, 100, 6, 1},
-		InfoLevels{2, 250, 7, 2},
+const vector<InfoLevels> levelsInfo = {
+		InfoLevels{0, 100, 4, 0},
+		InfoLevels{1, 300, 6, 1},
+		InfoLevels{2, 450, 7, 2},
 		InfoLevels{3, 600, 4, 3},
 		InfoLevels{4, 1300, 3, 4},
 		InfoLevels{5, 99999, 1, 20},
 	};
 
+enum Boton { play, save, menu, exitt, load };
+
+class App {
+private:
+	
+
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
-	Texture* textures[NUM_TEXTURES];
 	GameStateMachine* maquinaEstados;
 
 	bool exit = false;
 
 public:
+	Texture* textures[NUM_TEXTURES]; //PROVISIONAL (o definitivo segun)
+
+
 	App();
 	~App();
 
@@ -148,4 +151,6 @@ public:
 	Texture* returnTexture(OBJETOS obj);
 	void pushStateApp(GameState* gState);
 	void popStateApp();
+
+	void volverMenu();
 };

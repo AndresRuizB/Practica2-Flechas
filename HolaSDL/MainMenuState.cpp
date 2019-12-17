@@ -64,7 +64,7 @@ void MainMenuState::playState()
 void MainMenuState::exitState()
 {
 	//funcionar funciona pero como se imprimen muchas cosas por pantalla no se ve nah
-	cout << "CERRRAAARRRR SDLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL\n";
+	cout << "Cerrar SDL\n";
 }
 
 void MainMenuState::menuToPlay()
@@ -75,6 +75,11 @@ void MainMenuState::menuToPlay()
 void MainMenuState::exitFromMenu()
 {
 	cout << "Exit button clicked\n";
+
+	//asi se elimina todo lo de sdl pero la info esta en app
+	/*SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();*/
 }
 
 void MainMenuState::loadFromMenu()

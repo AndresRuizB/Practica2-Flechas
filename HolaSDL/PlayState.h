@@ -1,12 +1,14 @@
 #pragma once
 #include "GameState.h"
+#include "App.h"
+#include "Game.h"
 
 using namespace std;
 
 class PlayState :public GameState //hereda de gameState
 {
 private:
-	
+	Game* game;
 
 public:
 	PlayState(App* a);

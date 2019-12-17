@@ -19,6 +19,7 @@ protected:
 
 	Vector2D direccion;
 	SDL_Rect frameDestino;
+	Game* game;
 
 public:
 	ArrowsGameObject();
