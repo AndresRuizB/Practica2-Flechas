@@ -1,9 +1,9 @@
 #pragma once
 #include "GameState.h"
-#include "App.h"
 #include "Game.h"
 
 using namespace std;
+class App;
 
 class PlayState :public GameState //hereda de gameState
 {

@@ -3,8 +3,9 @@
 #include "App.h"
 #include "GameState.h"
 
-MenuButton::MenuButton(App* a, GameState* g, Texture* t, int x, int y,  void (*cb)())
+MenuButton::MenuButton(App* a, GameState* g, Texture* t, int x, int y,  CallBack* cb)
 {
+	app = a;
 	textura = t;
 
 	ancho = textura->getW();
@@ -17,7 +18,7 @@ MenuButton::MenuButton(App* a, GameState* g, Texture* t, int x, int y,  void (*c
 	framedestino.x = x;
 	framedestino.y = y;
 
-	mCallback = cb;
+	action = cb;
 }
 
 MenuButton::~MenuButton()
@@ -44,7 +45,7 @@ void MenuButton::handleEvent(SDL_Event& event)
 		punto.y = y;
 
 		if (SDL_PointInRect(&punto, &framedestino)) {			
-			mCallback();
+			action(app);
 		}
 	}
 }

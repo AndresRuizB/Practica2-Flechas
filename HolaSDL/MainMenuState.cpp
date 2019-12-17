@@ -1,5 +1,4 @@
 #include "MainMenuState.h"
-#include "App.h"
 #include "PlayState.h"
 #include "MenuButton.h"
 
@@ -44,45 +43,24 @@ void MainMenuState::handleEvent()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		if (event.type == SDL_KEYDOWN)
-		{
-			playState();
-		}
-		else {
-
-			for (list<EventHandler*>::const_iterator it = manejadoresEventos.begin(); it != manejadoresEventos.end(); ++it)(*it)->handleEvent(event);
-		}
+		for (list<EventHandler*>::const_iterator it = manejadoresEventos.begin(); it != manejadoresEventos.end(); ++it)(*it)->handleEvent(event);		
 	}
 }
 
-void MainMenuState::playState()
-{
-	PlayState* p = new PlayState(app);
-	app->pushStateApp(p);
-}
 
-void MainMenuState::exitState()
+void MainMenuState::menuToPlay(App* app)
 {
-	//funcionar funciona pero como se imprimen muchas cosas por pantalla no se ve nah
-	cout << "Cerrar SDL\n";
-}
-
-void MainMenuState::menuToPlay()
-{
+	app->menuToPlay();
 	cout << "Play button clicked\n";
 }
 
-void MainMenuState::exitFromMenu()
+void MainMenuState::exitFromMenu(App* app)
 {
+	app->salir();
 	cout << "Exit button clicked\n";
-
-	//asi se elimina todo lo de sdl pero la info esta en app
-	/*SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();*/
 }
 
-void MainMenuState::loadFromMenu()
+void MainMenuState::loadFromMenu(App* app)
 {
-	cout << "load button clicked\n";
+	cout << "Load button clicked\n";
 }

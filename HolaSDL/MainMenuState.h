@@ -4,6 +4,7 @@
 #include "MenuButton.h"
 
 using namespace std;
+class App;
 
 class MainMenuState : public GameState {
 private:
@@ -15,10 +16,8 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void handleEvent();
-	virtual void playState();
-	virtual void exitState();
 
-	static void menuToPlay();
-	static void exitFromMenu();
-	static void loadFromMenu();
+	static void menuToPlay(App* app);
+	static void exitFromMenu(App* app);
+	static void loadFromMenu(App* app);
 };

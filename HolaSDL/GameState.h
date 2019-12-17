@@ -10,6 +10,7 @@ class GameStateMachine;
 class App;
 
 using namespace std;
+using CallBack = void(App* app);
 
 class GameState {
 private:
@@ -26,7 +27,5 @@ public:
 	virtual void render() = 0;
 	virtual void update() = 0;
 	virtual void handleEvent() = 0;
-	virtual void playState() = 0;
-	virtual void exitState() = 0;
 
 };

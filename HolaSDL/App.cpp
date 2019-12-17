@@ -1,6 +1,7 @@
 #include "App.h"
 #include "GameStateMachine.h"
 #include "MainMenuState.h"
+#include "PlayState.h"
 
 
 App::App()
@@ -27,6 +28,7 @@ App::~App()
 {
 	delete maquinaEstados;
 	for (uint i = 0; i < NUM_TEXTURES; i++) delete textures[i];
+	salir();
 }
 
 void App::run()
@@ -58,8 +60,20 @@ void App::popStateApp()
 	maquinaEstados->popState();
 }
 
+void App::menuToPlay()
+{
+	maquinaEstados->changeState(new PlayState(this));
+}
+
 void App::volverMenu()
 {
 	popStateApp();
 	maquinaEstados->pushState(new MainMenuState(this));
+}
+
+void App::salir()
+{
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 }

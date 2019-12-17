@@ -152,5 +152,7 @@ public:
 	void pushStateApp(GameState* gState);
 	void popStateApp();
 
+	void menuToPlay();
 	void volverMenu();
+	void salir();
 };
