@@ -12,11 +12,11 @@ MainMenuState::MainMenuState(App* a)
 	escenario.push_back(pla);
 	manejadoresEventos.push_back(pla);
 
-	MenuButton* exi = new MenuButton(a, this, a->returnTexture(exitbutton), 500, 230, exitFromMenu);
+	MenuButton* exi = new MenuButton(a, this, a->returnTexture(exitbutton), 600, 230, exitFromMenu);
 	escenario.push_back(exi);
 	manejadoresEventos.push_back(exi);
 
-	MenuButton* loa = new MenuButton(a, this, a->returnTexture(loadbutton), 300, 230, loadFromMenu);
+	MenuButton* loa = new MenuButton(a, this, a->returnTexture(loadbutton), 350, 230, loadFromMenu);
 	escenario.push_back(loa);
 	manejadoresEventos.push_back(loa);
 }

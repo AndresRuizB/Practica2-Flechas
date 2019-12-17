@@ -43,10 +43,8 @@ void MenuButton::handleEvent(SDL_Event& event)
 		punto.x = x;
 		punto.y = y;
 
-		if (SDL_PointInRect(&punto, &framedestino)) {
-			
+		if (SDL_PointInRect(&punto, &framedestino)) {			
 			mCallback();
-
 		}
 	}
 }

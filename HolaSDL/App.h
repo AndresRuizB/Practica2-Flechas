@@ -114,7 +114,7 @@ const vector<InfoTexture> texturesInfo = {
 	InfoTexture{"..\\images\\Cartoon_Forest_BG_04.png", 1, 1},
 	InfoTexture{"..\\images\\rewards.png",10,8},
 	InfoTexture{"..\\images\\bubble.png",1,1},
-	InfoTexture{"..\\images\\pause.png",1,1},
+	InfoTexture{"..\\images\\play.png",1,1},
 	InfoTexture{"..\\images\\exit.png",1,1},
 	InfoTexture{"..\\images\\load.png",1,1},
 };
