@@ -19,6 +19,8 @@ public:
 	virtual void update();
 	virtual void handleEvent();
 
+	void Records(int puntuacion);
+
 	static void exit(App* app);
 	static void retunToMenu(App* app);
 };

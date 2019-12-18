@@ -140,6 +140,8 @@ private:
 	SDL_Renderer* renderer = nullptr;
 	GameStateMachine* maquinaEstados;
 
+	int puntuacion;
+
 	bool exit = false;
 	bool menuPlay = false;
 	bool vMenu = false;

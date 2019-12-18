@@ -37,6 +37,11 @@ void PlayState::handleEvent()
 	game->handleEvents();
 }
 
+int PlayState::returnPuntuacion()
+{
+	return game->returnPuntuacion();
+}
+
 void PlayState::save()
 {
 	game->guardarPartida();

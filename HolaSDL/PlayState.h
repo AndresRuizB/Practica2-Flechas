@@ -19,5 +19,6 @@ public:
 	virtual void render();
 	virtual void handleEvent();
 
+	int returnPuntuacion();
 	void save();
 };
