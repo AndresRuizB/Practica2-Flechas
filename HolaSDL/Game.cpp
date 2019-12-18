@@ -63,10 +63,7 @@ void Game::update() { //avisa a los objetos para que se actualicen
 	generaGlobo();
 	condicionFinDeJuego();
 	if (puntuacion >= levelsInfo[nivelActual].puntosSigNivel || pasoNivelPorReward) cambiaNivel();
-
-
-
-
+	   	 
 	if (exit)app->endGame();//pantalla de fin de juego
 }
 
@@ -333,6 +330,7 @@ void Game::cargarPartida(string file) {
 			fondo = app->returnTexture((OBJETOS)(nivelActual + 7));
 			input >> puntuacion;
 			input >> numFlechas;
+			scoreBoard->actualizaFlechas(numFlechas);//inicializa el numero de flechas
 		}
 		else if (line == "bow") {
 			arco->loadFromFile(&input);
