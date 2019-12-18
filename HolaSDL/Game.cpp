@@ -335,6 +335,7 @@ void Game::cargarPartida(string file) {
 		if (line == "game") {
 			input >> numMariposas;
 			input >> nivelActual;
+			fondo = app->returnTexture((OBJETOS)(nivelActual + 7));
 			input >> puntuacion;
 			input >> numFlechas;
 		}

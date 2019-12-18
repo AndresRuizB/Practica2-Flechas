@@ -50,16 +50,15 @@ void MainMenuState::handleEvent()
 void MainMenuState::menuToPlay(App* app)
 {
 	app->menuToPlay();
-	cout << "Play button clicked\n";
 }
 
 void MainMenuState::exitFromMenu(App* app)
 {
 	app->salir();
-	cout << "Exit button clicked\n";
 }
 
 void MainMenuState::loadFromMenu(App* app)
 {
-	cout << "Load button clicked\n";
+	cout << "load";
+	app->loadGame();
 }

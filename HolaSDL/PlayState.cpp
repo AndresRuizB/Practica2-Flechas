@@ -9,6 +9,14 @@ PlayState::PlayState(App* a)
 	game = new Game(app);
 }
 
+PlayState::PlayState(App* a, string archivo)
+{
+	cout << "Cargado de archivo \n";
+	game = new Game(a);
+	try { game->cargarPartida(archivo + ".txt"); }
+	catch (FileNotFoundError e) { cout << "Error al intentar acceder al arvhivo de guatdado. " << e.what(); }
+}
+
 PlayState::~PlayState()
 {
 	delete game;
@@ -28,15 +36,11 @@ void PlayState::render()
 void PlayState::handleEvent()
 {
 	game->handleEvents();
+}
 
-
-
-	/*SDL_Event event;
-	while (SDL_PollEvent(&event)) {
-		if (event.type == SDL_KEYDOWN) {
-			//app->popStateApp();
-		}
-	}*/
+void PlayState::save()
+{
+	game->guardarPartida();
 }
 
 

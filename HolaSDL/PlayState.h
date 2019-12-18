@@ -12,9 +12,12 @@ private:
 
 public:
 	PlayState(App* a);
+	PlayState(App* a, string archivo);
 	virtual ~PlayState();
 
 	virtual void update();
 	virtual void render();
 	virtual void handleEvent();
+
+	void save();
 };

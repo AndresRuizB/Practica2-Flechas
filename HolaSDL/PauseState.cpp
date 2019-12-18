@@ -52,7 +52,7 @@ void PauseState::resume(App* app)
 
 void PauseState::save(App* app)
 {
-	cout << "pause\n";
+	app->saveGame();
 }
 
 void PauseState::exit(App* app)

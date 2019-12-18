@@ -44,7 +44,14 @@ void App::run()
 		maquinaEstados->render();
 
 		if (menuPlay) {
-			maquinaEstados->changeState(new PlayState(this));
+			if (load) {
+				string archivo;
+				cout << "Dime el codigo de tu archivo: ";
+				cin >> archivo;
+				maquinaEstados->changeState(new PlayState(this, archivo));
+				load = false;
+			}
+			else maquinaEstados->changeState(new PlayState(this));
 			menuPlay = false;
 		}
 		else if (vMenu) {
@@ -55,6 +62,11 @@ void App::run()
 		else if (contGame) {
 			popStateApp();
 			contGame = false;
+
+			if (save) { //llamar al game q guarde
+				maquinaEstados->currentState()->save();
+				exit = true;
+			}
 		}
 
 		frameTime = SDL_GetTicks() - startTime; //tiempo transquirrido durante el frame
@@ -111,4 +123,16 @@ void App::endGame()
 {
 	popStateApp();
 	maquinaEstados->pushState(new EndState(this));
+}
+
+void App::saveGame()
+{
+	contGame = true;
+	save = true;
+}
+
+void App::loadGame()
+{
+	menuPlay = true;
+	load = true;
 }

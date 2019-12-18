@@ -144,7 +144,8 @@ private:
 	bool menuPlay = false;
 	bool vMenu = false;
 	bool contGame = false;
-
+	bool save = false;
+	bool load = false;
 
 public:
 	Texture* textures[NUM_TEXTURES]; //PROVISIONAL (o definitivo segun)
@@ -164,4 +165,6 @@ public:
 	void pausa();
 	void continueGame();
 	void endGame();
+	void saveGame();
+	void loadGame();
 };
