@@ -80,21 +80,14 @@ void Game::handleEvents() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true; //si se cierra
-		else if (event.type == SDL_KEYDOWN && (event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_ESCAPE)) {
-			if (event.key.keysym.sym == SDLK_s) {
-				exit = true;
-				guardar = true;
-			}
-			else if (event.key.keysym.sym == SDLK_ESCAPE) {
-				app->pausa();
-			}
+		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) { //pausa
+			app->pausa();
 		}
-		else {
+		else {//los handle events de todos los objetos q reaccionan a envetntos de la escena
 			for (list<EventHandler*>::iterator it = hEventsObjetos.begin(); it != hEventsObjetos.end(); ++it) {
 				(*it)->handleEvent(event);
 			}
 		}
-
 	}
 }
 

@@ -7,6 +7,8 @@
 MainMenuState::MainMenuState(App* a)
 {
 	app = a;
+
+	//botones
 	aux = new MenuButton(a, this, a->returnTexture(playbutton), 100, 230, menuToPlay);
 	escenario.push_back(aux);
 	manejadoresEventos.push_back(static_cast<MenuButton*>(aux));
@@ -59,6 +61,5 @@ void MainMenuState::exitFromMenu(App* app)
 
 void MainMenuState::loadFromMenu(App* app)
 {
-	cout << "load";
 	app->loadGame();
 }

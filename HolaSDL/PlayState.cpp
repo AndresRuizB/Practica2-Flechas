@@ -9,9 +9,9 @@ PlayState::PlayState(App* a)
 	game = new Game(app);
 }
 
+//segunda constructora
 PlayState::PlayState(App* a, string archivo)
 {
-	cout << "Cargado de archivo \n";
 	game = new Game(a);
 	try { game->cargarPartida(archivo + ".txt"); }
 	catch (FileNotFoundError e) { cout << "Error al intentar acceder al arvhivo de guatdado. " << e.what(); }
@@ -30,7 +30,6 @@ void PlayState::update()
 void PlayState::render()
 {
 	game->render();
-	SDL_Rect obj;
 }
 
 void PlayState::handleEvent()

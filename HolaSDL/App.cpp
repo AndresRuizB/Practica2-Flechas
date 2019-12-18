@@ -43,27 +43,27 @@ void App::run()
 		maquinaEstados->update();
 		maquinaEstados->render();
 
-		if (menuPlay) {
-			if (load) {
+		if (menuPlay) { //pasar del menu al play
+			if (load) { //carga de archivo
 				string archivo;
 				cout << "Dime el codigo de tu archivo: ";
 				cin >> archivo;
 				maquinaEstados->changeState(new PlayState(this, archivo));
 				load = false;
 			}
-			else maquinaEstados->changeState(new PlayState(this));
+			else maquinaEstados->changeState(new PlayState(this)); //empieza un nuevo juego
 			menuPlay = false;
 		}
-		else if (vMenu) {
+		else if (vMenu) { //volver al menu
 			popStateApp();
-			maquinaEstados->pushState(new MainMenuState(this));
+			maquinaEstados->pushState(new MainMenuState(this)); //crea el menu
 			vMenu = false;
 		}
-		else if (contGame) {
+		else if (contGame) { //salir de pausa y continuar el juego
 			popStateApp();
 			contGame = false;
 
-			if (save) { //llamar al game q guarde
+			if (save) { //llamar al game q guarde y cerrar el juego
 				maquinaEstados->currentState()->save();
 				exit = true;
 			}
@@ -91,7 +91,7 @@ void App::popStateApp()
 	maquinaEstados->popState();
 }
 
-void App::menuToPlay()
+void App::menuToPlay() //de menu principal al juego
 {
 	menuPlay = true;
 }
@@ -101,7 +101,7 @@ void App::volverMenu()
 	vMenu = true;
 }
 
-void App::salir()
+void App::salir() //sale de SDL
 {
 	exit = true;
 	SDL_DestroyRenderer(renderer);
@@ -114,12 +114,12 @@ void App::pausa()
 	maquinaEstados->pushState(new PauseState(this));
 }
 
-void App::continueGame()
+void App::continueGame() //de pausa de vuelta a game
 {
 	contGame = true;
 }
 
-void App::endGame()
+void App::endGame() //cuando mueres
 {
 	popStateApp();
 	maquinaEstados->pushState(new EndState(this));
@@ -127,12 +127,12 @@ void App::endGame()
 
 void App::saveGame()
 {
-	contGame = true;
-	save = true;
+	contGame = true; //dice que tiene que eliminar el estado de pausa
+	save = true; //tiene que guardar
 }
 
 void App::loadGame()
 {
-	menuPlay = true;
+	menuPlay = true; //se pasa al estado play y ademas se carga partida
 	load = true;
 }
