@@ -14,16 +14,3 @@ ArrowsGameObject::ArrowsGameObject() {
 ArrowsGameObject::~ArrowsGameObject()
 {
 }
-
-void ArrowsGameObject::loadFromFile(ifstream* input) {
-	int x, y;
-	*input >> x;
-	*input >> y;
-	direccion = Vector2D(x, y);
-	SDLGameObject::loadFromFile(input);
-}
-
-void ArrowsGameObject::saveToFile(ofstream* output) {
-	*output << direccion.GetX() << " " << direccion.GetY() << "\n";
-	SDLGameObject::saveToFile(output);
-}

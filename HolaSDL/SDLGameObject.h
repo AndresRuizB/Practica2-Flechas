@@ -17,6 +17,13 @@ protected:
 
 public:
 
-	virtual void saveToFile(ofstream* output) ;
-	virtual void loadFromFile(ifstream* input) ;
+	virtual void saveToFile(ofstream* output) {
+		*output << posicion.GetX() << " " << posicion.GetY() << "\n";
+	};
+	virtual void loadFromFile(ifstream* input) {
+		int x, y;
+		*input >> x;
+		*input >> y;
+		posicion = Vector2D(x, y);
+	};
 };

@@ -29,6 +29,16 @@ public:
 	virtual SDL_Rect getCollisionRect() = 0;
 	virtual void setItList(list<GameObject*>::iterator it) = 0;
 
-	virtual void saveToFile(ofstream* output);
-	virtual void loadFromFile(ifstream* input);
+	virtual void saveToFile(ofstream* output) {
+		*output << direccion.GetX() << " " << direccion.GetY() << "\n";
+		SDLGameObject::saveToFile(output);
+	};
+
+	virtual void loadFromFile(ifstream* input) {
+		int x, y;
+		*input >> x;
+		*input >> y;
+		direccion = Vector2D(x, y);
+		SDLGameObject::loadFromFile(input);
+	};
 };
