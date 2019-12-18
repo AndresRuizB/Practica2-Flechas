@@ -121,8 +121,11 @@ void App::continueGame()
 
 void App::endGame()
 {
+	puntuacion = dynamic_cast<PlayState*>(maquinaEstados-> currentState())->returnPuntuacion();
 	popStateApp();
-	maquinaEstados->pushState(new EndState(this));
+	EndState* eState = new EndState(this);
+	maquinaEstados->pushState(eState);
+	eState->Records(puntuacion);
 }
 
 void App::saveGame()
