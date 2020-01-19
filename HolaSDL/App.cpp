@@ -65,7 +65,6 @@ void App::run()
 
 			if (save) { //llamar al game q guarde y cerrar el juego
 				maquinaEstados->currentState()->save();
-				exit = true;
 			}
 		}
 

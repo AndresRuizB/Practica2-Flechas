@@ -21,12 +21,17 @@ protected:
 	SDL_Renderer* renderer;
 	App* app;
 	bool menu = false;
+
+
+	Texture* fondo;
+	SDL_Rect obj;
+
 public:
 	GameState();
 	virtual ~GameState();
 
-	virtual void render() = 0;
+	virtual void render();
 	virtual void update() = 0;
-	virtual void handleEvent() = 0;
+	virtual void handleEvent();
 	virtual void save() {};
 };

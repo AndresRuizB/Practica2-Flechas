@@ -10,8 +10,6 @@ class PauseState :public GameState //hereda de gameState
 {
 private:
 	GameObject* aux;
-	Texture* fondo;
-	SDL_Rect obj;
 	bool continuePlaying = false;
 
 public:
@@ -19,8 +17,6 @@ public:
 	virtual ~PauseState();
 
 	virtual void update();
-	virtual void render();
-	virtual void handleEvent();
 
 	static void resume(App* app);
 	static void save(App* app);
