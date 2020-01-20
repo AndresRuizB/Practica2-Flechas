@@ -18,7 +18,7 @@ protected:
 public:
 
 	virtual void saveToFile(ofstream* output) {
-		*output << posicion.GetX() << " " << posicion.GetY() << "\n";
+		*output << (int)posicion.GetX() << " " << (int)posicion.GetY() << "\n";
 	};
 	virtual void loadFromFile(ifstream* input) {
 		int x, y;

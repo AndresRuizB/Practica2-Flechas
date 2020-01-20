@@ -323,6 +323,7 @@ void Game::cargarPartida(string file) {
 	string line;
 
 	while (input >> line) {
+	cout << line;
 
 		if (line == "game") {
 			input >> numMariposas;

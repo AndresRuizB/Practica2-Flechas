@@ -33,12 +33,4 @@ public:
 		*output << direccion.GetX() << " " << direccion.GetY() << "\n";
 		SDLGameObject::saveToFile(output);
 	};
-
-	virtual void loadFromFile(ifstream* input) {
-		int x, y;
-		*input >> x;
-		*input >> y;
-		direccion = Vector2D(x, y);
-		SDLGameObject::loadFromFile(input);
-	};
 };
