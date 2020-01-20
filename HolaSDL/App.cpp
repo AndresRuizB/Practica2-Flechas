@@ -116,6 +116,7 @@ void App::pausa()
 void App::continueGame() //de pausa de vuelta a game
 {
 	contGame = true;
+	save = false;
 }
 
 void App::endGame() //cuando mueres
